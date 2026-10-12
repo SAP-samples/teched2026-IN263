@@ -22,6 +22,8 @@ After completing these steps you will have generated an AI Review Report for you
 
 1. In SAP Integration Suite, open the integration flow that contains the Groovy script, and open the **script editor in edit mode** (double-click the Groovy script step, then edit the script).
 
+   > If you arrived here from a memory profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.2](../ex2/README.md)). The script editor then opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
+
 2. Choose **Optimize** from the upper-right menu of the script editor.
 
 3. Generative AI inspects your script and displays an **AI Review Report**. If there is potential for improvement, the report contains:
