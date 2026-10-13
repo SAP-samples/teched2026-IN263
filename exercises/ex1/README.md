@@ -17,59 +17,92 @@ Common prerequisites for all sub-exercises (see also [Getting Started](../ex0/RE
 - An **integration package** to hold your artifacts. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package). You can reuse one package for all three MCP servers in this exercise.
 
 > **General notes that apply to every MCP server you create:**
-> - The OpenAPI specification used as a source must be a version between **3.0.0 and 3.0.3**. Swagger 2.0 and earlier are not supported.
+> - The OpenAPI specification used as a source must be a version between **3.0.0 and 3.0.3**. Swagger 2.0 and earlier are not supported. (When you import an OData `$metadata` (EDMX) file into an API artifact, Integration Suite converts it to OpenAPI 3.0.0 automatically.)
 > - MCP servers can only be **deployed and managed on the Integration Cell runtime profile**.
-> - Each MCP server supports up to **30 tools**.
+> - There is a per-server limit on the number of tools you can expose. Check the current limit in the tool-selection step of the wizard and keep your selection at or below it.
 > - The **MCP Path** (base path) must not be empty or set to only `/`.
+> - After you choose **Deploy** for an API artifact or MCP server, **wait for the Runtime Status to change to `STARTED`** before navigating away or reloading the page. Leaving the page while a deployment is still being submitted can silently abort it, leaving the artifact in `Not Deployed`.
 
 ---
 
 ## Exercise 1.1 Create an MCP Server from an API Artifact (S/4HANA Cloud)
 
-After completing these steps you will have exposed a deployed API artifact (for example, the S/4HANA Cloud **Business Partner** API) as an MCP server, so that AI agents can discover and invoke its operations as tools.
+After completing these steps you will have exposed a deployed API artifact (here, the S/4HANA Cloud **Sales Order** OData API `API_SALES_ORDER_SRV`) as an MCP server, so that AI agents can discover and invoke its operations as tools.
 
-> **Reference:** [Create an MCP Server from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-api-artifact)
+This sub-exercise has two parts: first you **create and deploy the API artifact** from an S/4HANA Cloud OData service (1.1.1), then you **create and deploy the MCP server** from that API artifact (1.1.2).
+
+> **References**
+> - [Create an API Artifact Using a Destination](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-api-artifact-by-referring-to-destination)
+> - [Create an MCP Server from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-api-artifact)
 
 **Additional prerequisites for this method:**
 
-- Only **OData and REST** API artifacts **deployed on the Integration Cell runtime** can be discovered and exposed as an MCP server.
-- Only APIs with **OAuth-based authentication** can be used to create an MCP server.
-- You have an API artifact for an S/4HANA Cloud API (for example, Business Partner) already created and deployed on Integration Cell. (You can design one from an S/4HANA Cloud OData service available on SAP Business Accelerator Hub.)
+- Only **OData and REST** API artifacts **deployed on the Integration Cell runtime** can be exposed as an MCP server.
+- Access to an S/4HANA Cloud OData service (here `API_SALES_ORDER_SRV`), reachable from SAP BTP, with a communication user/arrangement that permits the operations you want to expose. See [SAP Business Accelerator Hub](https://api.sap.com/) for the API and its metadata.
+- A **BTP destination** to the S/4HANA Cloud system, created in the **same subaccount that hosts your SAP Integration Suite / Integration Cell**, with the label `IntegrationCell.Include = true` so the Integration Cell can discover it. (This is the same kind of destination used in Exercise 1.2; see the destination steps there.)
 
-**Steps:**
+> **Note on authentication:** The official documentation states that only APIs with **OAuth-based authentication** can be used to create an MCP server. In practice, depending on your tenant edition and release, an API artifact backed by a **Basic authentication** destination may also work. If MCP-server creation rejects your API, reconfigure the destination to use OAuth 2.0 against the S/4HANA Cloud token endpoint (the SAP_COM scenario on the S/4 side supports OAuth) and redeploy the API.
 
-1. Log on to SAP Integration Suite.
+> **Note on discovering a full API catalog ("Discoverable Systems"):** The Add API wizard also offers a *Discoverable Systems* tab that lets you browse an entire S/4HANA Cloud API catalog instead of a single endpoint. That tab is populated from a **BTP global-account formation (system landscape)** that groups your Integration Suite and S/4HANA Cloud systems — it is **not** the in-app *Settings → Integrations → System* tab (which is only for SAP Process Orchestration systems). Setting up a formation requires global-account administrator rights and is out of scope here; this exercise uses the simpler **destination** route, which produces the same kind of deployable API artifact. See [Create an API Artifact Using a Discoverable System](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-api-artifact-by-referring-to-discoverable-system) if your landscape already has a formation.
 
-2. From the left navigation pane, choose **Design → Integrations and APIs** to view the list of integration packages.
+### Exercise 1.1.1 Create and Deploy the API Artifact
 
-3. Select the integration package where you want to add the MCP server artifact and choose **Edit**.
+1. Log on to SAP Integration Suite and choose **Design → Integrations and APIs**.
 
-4. On the package details page, choose **Artifacts**, and under **Add**, select **MCP Server**. The **Create MCP Server** dialog opens.
+2. Open (or create) your integration package and choose **Edit**. On the **Artifacts** tab, choose **Add → API**.
 
-5. Select **API** as the source type and choose **Next**.
+3. In the **Add API** wizard:
+   - **Select Runtime Profile:** choose **Integration Cell** (not Cloud Integration), then **Next**. (Selecting Integration Cell removes the "Select API Type" step.)
+   - **Select a Method:** choose **API Provider**, then **Next**.
+   - **Select API Provider:** open the **Destinations** tab. Your labeled destination (e.g. `IN263_S4HC_SalesOrder`) appears here because it carries `IntegrationCell.Include = true`. Select it and choose **Next**.
 
-6. In the **Provide MCP Details** step, choose the icon next to the **API** field. In the **Select an API** dialog, search for the deployed S/4HANA Cloud managed API (for example, *Business Partner*), select it, and choose **Add**.
-
-7. Fill in the MCP server details:
+4. In **Provide API Details**, fill in:
 
    | Field | Value |
    | --- | --- |
-   | **Name** | An intuitive name, e.g. `S4HANA_BusinessPartner`. Use only alphanumeric characters and underscores (`_`). |
-   | **ID** | The identifier shown on the home screen. You can use spaces and `_`, `.`, `-`. |
-   | **MCP Path** | The path prefix under which the server is exposed, e.g. `/BusinessPartner`. Must not be empty or just `/`. |
-   | **Version** | Optional. Add a version to manage multiple concurrent versions of the server. |
-   | **Runtime Profile** | Select the **Integration Cell** runtime node. |
-   | **Virtual Host** | Review the virtual host URL; it is combined with the base path to form the public endpoint. |
+   | **Name / ID** | e.g. `IN263_SalesOrder_API` |
+   | **API Provider** | Pre-filled with the selected destination |
+   | **Relative URL** | The OData service path, e.g. `/sap/opu/odata/sap/API_SALES_ORDER_SRV` |
+   | **Service Type** | **ODATA** |
+   | **API Base Path** | Defaults from the name, e.g. `/IN263_SalesOrder_API` |
+   | **Runtime Profile / Virtual Host** | **Integration Cell** / the pre-filled Integration Cell virtual host |
 
-8. Choose **Next** to proceed to **Create Tools**.
+   > **Tip (avoid a doubled path):** The effective backend call is the destination's base URL plus this **Relative URL**. If the destination URL already includes the full service path, keep the destination at the **host only** (e.g. `https://my-s4-system.s4hana.cloud.sap`) and put the service path in the Relative URL, so you don't end up calling `.../API_SALES_ORDER_SRV/sap/opu/odata/sap/API_SALES_ORDER_SRV`.
 
-9. In **Create Tools**, select the API resources (operations) you want to expose as MCP tools by checking the checkbox next to each one. Remember the limit of **30 tools** per MCP server.
+5. Choose **Next**. The optional **Generate API Specification** step (AI) appears — you can skip it. Choose **Add** to create the API artifact. It opens in the API editor with **Status: Not Deployed**.
 
-10. Choose **Add** to finalize and create the MCP server. It opens in the editor view.
+6. The new API has **no resources** yet (it is just a proxy to the destination). To populate operations, open the **Resources** tab, choose **Edit**, then **Import**, and upload the OData service's **`$metadata` (EDMX)** file. Integration Suite generates all entity sets as resources (GET/POST/PUT/DELETE and navigation properties) and converts the artifact to OpenAPI 3.0.0. Review and **Save**.
 
-11. (Optional) Choose **Edit** to refine the configuration. Use the **MCP Configuration** tab to adjust **Source, Tools, Resources, and Prompts**, and the **Policies** tab to configure traffic-management and security policies. See [Configure an MCP Server Created from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-mcp-server-created-from-api-artifact).
+   > You can obtain the EDMX from the service's `$metadata` endpoint (`<service-url>/$metadata`) in an authenticated session, or download it from SAP Business Accelerator Hub.
 
-12. **Deploy** the MCP server (see [Deploy an MCP Server](#deploy-an-mcp-server) below).
+7. Choose **Deploy**, confirm the **Integration Cell** runtime profile and virtual host, and choose **Deploy**. **Wait** until the header shows **Status: Deployed … Runtime Status: STARTED** (do not reload/navigate while it is submitting).
+
+### Exercise 1.1.2 Create and Deploy the MCP Server
+
+1. Go back to your integration package (**Design → Integrations and APIs → your package**) and choose **Edit**.
+
+2. On the **Artifacts** tab, choose **Add → MCP Server**. The **Add MCP Server** dialog opens.
+
+3. **Select Source Type:** choose **API** — *"Create an MCP server from an API artifact deployed on Integration Cell"* — and choose **Next**.
+
+4. In **Provide MCP Details**, choose the value-help icon next to the **API** field and select your deployed API (e.g. `IN263_SalesOrder_API`). Then fill in:
+
+   | Field | Value |
+   | --- | --- |
+   | **API** | The deployed Integration Cell API artifact |
+   | **Name / ID** | e.g. `IN263_SalesOrder_MCP` (alphanumeric and `_`) |
+   | **MCP Path** | The path prefix under which the server is exposed, e.g. `/SalesOrderMCP`. Must not be empty or just `/`. |
+   | **Version** | Optional, e.g. `1.0.0` |
+   | **Runtime Profile** | **Integration Cell** |
+   | **Virtual Host** | The pre-filled Integration Cell virtual host |
+
+5. Choose **Next** to proceed to **Create Tools**. Select the API resources (operations) you want to expose as MCP tools by checking each one; keep the selection within the per-server tool limit shown.
+
+6. Choose **Add** to create the MCP server. It opens in the editor view.
+
+7. (Optional) Choose **Edit** to refine the configuration. Use the **MCP Configuration** tab to adjust **Source, Tools, Resources, and Prompts**, and the **Policies** tab to configure traffic-management and security policies. See [Configure an MCP Server Created from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-mcp-server-created-from-api-artifact).
+
+8. **Deploy** the MCP server (see [Deploy an MCP Server](#deploy-an-mcp-server) below) and wait for **Runtime Status: STARTED**. The **Overview** tab then shows the public **MCP URL** (virtual host + MCP Path, e.g. `https://<virtual-host>/SalesOrderMCP`) — this is the endpoint AI clients connect to in Exercise 1.4.
 
 ---
 
