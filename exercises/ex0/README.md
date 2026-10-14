@@ -55,7 +55,14 @@ A tenant administrator (`PI_Administrator`) has already activated the AI feature
 | **Proxy Type** | `Internet` |
 | **Authentication** | `NoAuthentication` |
 
-> The OpenSwissData MCP server is public, free (100 calls/hour/IP), and requires no key — so this destination needs no credentials. Only destinations with **Proxy Type** `Internet` can be used as a remote MCP source. Unlike the destinations consumed by the Integration Cell as API backends, this one does **not** need the `IntegrationCell.Include=true` label; the remote-MCP wizard lists it directly.
+Add the following two **Labels** (under **Additional Properties → Labels** / **New Property**):
+
+| Label | Value |
+| --- | --- |
+| `IntegrationCell.Include` | `true` |
+| `IntegrationCell.Provides` | `mcp` |
+
+> The OpenSwissData MCP server is public, free (100 calls/hour/IP), and requires no key — so this destination needs no credentials. Only destinations with **Proxy Type** `Internet` can be used as a remote MCP source. The `IntegrationCell.Include = true` label makes the Integration Cell discover the destination, and `IntegrationCell.Provides = mcp` marks it as a remote **MCP** source so it appears in the **Remote MCP Servers** step of the Add MCP Server wizard.
 
 ## Your integration package
 

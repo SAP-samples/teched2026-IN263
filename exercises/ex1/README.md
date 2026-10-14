@@ -93,7 +93,7 @@ After completing these steps you will have created an MCP server that **proxies 
 
 **Additional prerequisites for this method:**
 
-- A **destination** in SAP BTP Cockpit pointing to the remote MCP server. For this exercise the destination **`openswissdata`** is already set up for you (HTTP, Proxy Type `Internet`, `NoAuthentication`, URL `https://mcp.openswissdata.com/jsonrpc`) — see [Getting Started → The OpenSwissData destination](../ex0/README.md#the-openswissdata-destination-for-exercise-12). See also [Configure a Destination to Connect an MCP Server to a Remote MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-destination-to-connect-mcp-server-to-remote-mcp-server).
+- A **destination** in SAP BTP Cockpit pointing to the remote MCP server. For this exercise the destination **`openswissdata`** is already set up for you (HTTP, Proxy Type `Internet`, `NoAuthentication`, URL `https://mcp.openswissdata.com/jsonrpc`, with labels `IntegrationCell.Include = true` and `IntegrationCell.Provides = mcp`) — see [Getting Started → The OpenSwissData destination](../ex0/README.md#the-openswissdata-destination-for-exercise-12). See also [Configure a Destination to Connect an MCP Server to a Remote MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-destination-to-connect-mcp-server-to-remote-mcp-server).
 - Only destinations with **Proxy Type** `Internet` are currently supported (authentication: OAuth2ClientCredentials, NoAuthentication, BasicAuthentication, OAuth2Password, ClientCertificate).
 - The remote MCP server must support the **Streamable HTTP transport** — only servers exposed through Streamable HTTP can be proxified. (OpenSwissData does.)
 
@@ -118,20 +118,18 @@ After completing these steps you will have created an MCP server that **proxies 
 
    | Field | Value |
    | --- | --- |
-   | **Name** | An intuitive name, e.g. `OpenSwissData_Proxy`. Alphanumeric and `_` only. |
+   | **Name** | `OpenSwissData_MCP_99`, where `99` is your participant number. Alphanumeric and `_` only. |
    | **ID** | Identifier shown on the home screen. |
    | **Destination** | `openswissdata` (selected in the previous step; used to connect to the remote server and, by default, for runtime execution). |
    | **Relative Path** | *Optional.* Leave empty — the destination URL already points at the JSON-RPC endpoint. |
-   | **MCP Path** | Path prefix, e.g. `/SwissData`. Must not be empty or just `/`. |
+   | **MCP Path** | `openswissdata_mcp_99`, where `99` is your participant number. Must not be empty or just `/`. |
    | **Version** | Optional. |
    | **Runtime Profile** | The **Integration Cell** runtime node. |
    | **Virtual Host** | Review the virtual host URL. |
 
-8. In the **Create Tools** step, select the checkboxes next to the tools you want to expose from OpenSwissData (keep within the per-server tool limit shown in the wizard). The server offers, among others:
+8. In the **Create Tools** step, select the checkboxes for the two tools this exercise uses (keep within the per-server tool limit shown in the wizard):
    - `tariff_lookup` — Swiss customs tariff (TARES) line by tariff number
-   - `kyc_check` — search the FINMA register and warnings list by name
    - `company_check` — Swiss company lookup by UID (CHE-xxx.xxx.xxx)
-   - `cross_walk` — map a code between NOGA / NACE / ISIC classifications
 
 9. Choose **Add** to finalize and create the MCP server.
 
