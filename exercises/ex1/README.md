@@ -85,15 +85,17 @@ After completing these steps you will have exposed an external REST-based servic
 
 ## Exercise 1.2 Create an MCP Server Using a Remote MCP Server as the Source (Federation)
 
-After completing these steps you will have created an MCP server that **proxies a remote (third-party) MCP server**, so that SAP Integration Suite acts as a managed governance layer in front of it — applying security and traffic policies while leaving the remote server unchanged.
+After completing these steps you will have created an MCP server that **proxies a remote (third-party) MCP server** — the public **OpenSwissData** MCP server — so that SAP Integration Suite acts as a managed governance layer in front of it, applying security and traffic policies while leaving the remote server unchanged.
+
+> **About the remote server:** [OpenSwissData](https://www.openswissdata.com/) exposes an MCP server at `https://mcp.openswissdata.com/jsonrpc` that serves normalised Swiss federal reference data (customs tariff TARES, the FINMA register and warnings list, and NOGA/NACE/ISIC activity-code correspondences). It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) and requires **no authentication**, which makes it a convenient public server to federate for this exercise.
 
 > **Reference:** [Create an MCP Server Using Remote MCP Server as the Source](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-using-remote-mcp-server-as-source)
 
 **Additional prerequisites for this method:**
 
-- Set up a **destination** in SAP BTP Cockpit pointing to the remote MCP server. See [Configure a Destination to Connect an MCP Server to a Remote MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-destination-to-connect-mcp-server-to-remote-mcp-server).
+- A **destination** in SAP BTP Cockpit pointing to the remote MCP server. For this exercise the destination **`openswissdata`** is already set up for you (HTTP, Proxy Type `Internet`, `NoAuthentication`, URL `https://mcp.openswissdata.com/jsonrpc`) — see [Getting Started → The OpenSwissData destination](../ex0/README.md#the-openswissdata-destination-for-exercise-12). See also [Configure a Destination to Connect an MCP Server to a Remote MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-destination-to-connect-mcp-server-to-remote-mcp-server).
 - Only destinations with **Proxy Type** `Internet` are currently supported (authentication: OAuth2ClientCredentials, NoAuthentication, BasicAuthentication, OAuth2Password, ClientCertificate).
-- The remote MCP server must support the **Streamable HTTP transport** — only servers exposed through Streamable HTTP can be proxified.
+- The remote MCP server must support the **Streamable HTTP transport** — only servers exposed through Streamable HTTP can be proxified. (OpenSwissData does.)
 
 **Steps:**
 
@@ -107,31 +109,35 @@ After completing these steps you will have created an MCP server that **proxies 
 
 5. Select **Remote MCP Servers** as the source type and choose **Next**.
 
-6. Select the destination that points to the remote MCP server. Verify the following and choose **Next**:
-   - **Name** — destination identifier
-   - **URL** — remote MCP server endpoint
-   - **Authentication** — OAuth2 / Basic / None / ClientCertificate
+6. Select the **`openswissdata`** destination. Verify the following and choose **Next**:
+   - **Name** — `openswissdata`
+   - **URL** — `https://mcp.openswissdata.com/jsonrpc`
+   - **Authentication** — `NoAuthentication`
 
 7. In the **Provide MCP Details** step, fill in the details:
 
    | Field | Value |
    | --- | --- |
-   | **Name** | An intuitive name, e.g. `Partner_MCP_Proxy`. Alphanumeric and `_` only. |
+   | **Name** | An intuitive name, e.g. `OpenSwissData_Proxy`. Alphanumeric and `_` only. |
    | **ID** | Identifier shown on the home screen. |
-   | **Destination** | The destination selected in the previous step (used to connect to the remote server; by default also used for runtime execution). |
-   | **Relative Path** | *Optional.* The relative path of the remote MCP discovery/runtime endpoint, combined with the destination URL. |
-   | **MCP Path** | Path prefix, e.g. `/PartnerTools`. Must not be empty or just `/`. |
+   | **Destination** | `openswissdata` (selected in the previous step; used to connect to the remote server and, by default, for runtime execution). |
+   | **Relative Path** | *Optional.* Leave empty — the destination URL already points at the JSON-RPC endpoint. |
+   | **MCP Path** | Path prefix, e.g. `/SwissData`. Must not be empty or just `/`. |
    | **Version** | Optional. |
    | **Runtime Profile** | The **Integration Cell** runtime node. |
    | **Virtual Host** | Review the virtual host URL. |
 
-8. In the **Create Tools** step, select the checkboxes next to the tools you want to expose from the remote MCP server (keep within the per-server tool limit shown in the wizard).
+8. In the **Create Tools** step, select the checkboxes next to the tools you want to expose from OpenSwissData (keep within the per-server tool limit shown in the wizard). The server offers, among others:
+   - `tariff_lookup` — Swiss customs tariff (TARES) line by tariff number
+   - `kyc_check` — search the FINMA register and warnings list by name
+   - `company_check` — Swiss company lookup by UID (CHE-xxx.xxx.xxx)
+   - `cross_walk` — map a code between NOGA / NACE / ISIC classifications
 
 9. Choose **Add** to finalize and create the MCP server.
 
 10. (Optional) Choose **Edit** to adjust the configuration and policies. If the remote server needs different authentication for tool/resource/prompt execution, you can configure a separate runtime destination in the **Source** tab. See [Configure an MCP Server Created by Connecting to a Remote MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-mcp-server-created-by-connecting-to-remote-mcp-server).
 
-11. **Deploy** the MCP server (see below).
+11. **Deploy** the MCP server (see below). You can then inspect and invoke its proxied tools in Exercise 1.3 — for example, `tariff_lookup` with `hs8 = 8471.3000`.
 
 ---
 
@@ -205,7 +211,7 @@ After completing these steps you will have connected the **MCP Inspector** — t
 
 10. Choose **Connect**. Once connected, use **List Tools** and **List Resources** to see what the server exposes.
 
-11. Select a tool and **invoke** it with sample arguments — for example, a traffic-lookup tool from the Autobahn server (1.1) or a tool proxied from the remote server (1.2) — and confirm that the Inspector shows the response returned through the Integration Cell endpoint.
+11. Select a tool and **invoke** it with sample arguments — for example, a traffic-lookup tool from the Autobahn server (1.1), or the OpenSwissData `tariff_lookup` tool proxied via the federation server (1.2) with `hs8 = 8471.3000` — and confirm that the Inspector shows the response returned through the Integration Cell endpoint.
 
 > **Alternative:** If you have access to the SAP **Early Adopter Care (EAC)** program, you can instead consume the MCP server from **Joule Work Desktop** by adding it as a connector with the same endpoint URL and credentials. See [Invoke an MCP Server from Joule Work Desktop](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-from-joule-work-desktop).
 

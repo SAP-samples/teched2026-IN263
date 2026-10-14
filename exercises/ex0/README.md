@@ -43,6 +43,20 @@ A tenant administrator (`PI_Administrator`) has already activated the AI feature
 
 > **Note:** *Flow Step Recommendations* is always active and cannot be deactivated. The other AI features (for example, AI-assisted Error Resolution, Conversational Analytics) are optional for this session. These features are available to users who hold the role collections listed above.
 
+## The OpenSwissData destination (for Exercise 1.2)
+
+[Exercise 1.2](../ex1/README.md#exercise-12-create-an-mcp-server-using-a-remote-mcp-server-as-the-source-federation) federates a public remote MCP server. The destination it needs — **`openswissdata`** — has already been created for you in the **SAP BTP Cockpit** of the subaccount that hosts SAP Integration Suite (**Connectivity → Destinations → Create Destination → From Scratch**). To reproduce it in your own subaccount, create a destination with these values:
+
+| Field | Value |
+| --- | --- |
+| **Name** | `openswissdata` |
+| **Type** | `HTTP` |
+| **URL** | `https://mcp.openswissdata.com/jsonrpc` |
+| **Proxy Type** | `Internet` |
+| **Authentication** | `NoAuthentication` |
+
+> The OpenSwissData MCP server is public, free (100 calls/hour/IP), and requires no key — so this destination needs no credentials. Only destinations with **Proxy Type** `Internet` can be used as a remote MCP source. Unlike the destinations consumed by the Integration Cell as API backends, this one does **not** need the `IntegrationCell.Include=true` label; the remote-MCP wizard lists it directly.
+
 ## Your integration package
 
 This is the one setup step **you** perform — the rest of the exercises build artifacts inside your own package.
@@ -53,6 +67,6 @@ This is the one setup step **you** perform — the rest of the exercises build a
 
 ## Summary
 
-You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, and the activated AI features (**Memory Profiling** and **Script Optimization**) — and how to reproduce it in your own projects. You have also created your personal **`IN263 User <number>`** package to work in.
+You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also created your personal **`IN263 User <number>`** package to work in.
 
 Continue to - [Exercise 1 - Create and Govern MCP Servers](../ex1/README.md)
