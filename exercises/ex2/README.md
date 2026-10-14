@@ -11,7 +11,7 @@ The recommendations are actionable, validated, and aligned with the official [In
 
 ## Prerequisites
 
-- A **tenant administrator** has enabled the **Memory Profiling** feature. In SAP Integration Suite, go to **Settings → Artificial Intelligence** and confirm that the **Memory Profiling** feature's **Activation Status** toggle is **ON**. Its description reads *"Shows the memory insights derived during simulation and suggests improvements."* (See [Getting Started, Exercise 0.2](../ex0/README.md).)
+- A **tenant administrator** has enabled the **Memory Profiling** feature. In SAP Integration Suite, go to **Settings → Artificial Intelligence** and confirm that the **Memory Profiling** feature's **Activation Status** toggle is **ON**. Its description reads *"Shows the memory insights derived during simulation and suggests improvements."* (This is pre-configured for the session — see [Getting Started](../ex0/README.md).)
 - An existing integration flow that does some non-trivial payload processing (for example, a flow that reads a larger message, maps it, and uses a Content Modifier / Groovy script) so that there is memory behavior worth profiling.
 - If the integration flow contains a **Groovy script** step and you want to act on script recommendations:
   - The integration flow must be opened in **edit mode**, because script optimization inputs are applied in the Groovy editor.
@@ -25,7 +25,7 @@ The recommendations are actionable, validated, and aligned with the official [In
 
 After completing these steps you will have run a simulation of (a subset of) your integration flow with memory profiling enabled.
 
-1. In SAP Integration Suite, choose **Design → Integrations and APIs**, open your **`IN263 User <number>`** package (see [Getting Started, Exercise 0.1](../ex0/README.md)), open the **Artifacts** tab, and select the integration flow you want to profile to open it in the integration flow editor.
+1. In SAP Integration Suite, choose **Design → Integrations and APIs**, open your **`IN263 User <number>`** package (see [Getting Started](../ex0/README.md)), open the **Artifacts** tab, and select the integration flow you want to profile to open it in the integration flow editor.
 
 2. Choose **Edit** (top right) to open the flow in **edit mode**. The simulation controls are only enabled in edit mode.
 

@@ -22,7 +22,7 @@ By the end of the session you will have:
 
 ## Requirements
 
-To follow the exercises in this repository you need:
+To follow the exercises in this repository you need the following. In the TechEd hands-on room this is **pre-provisioned by the instructor** (see [Getting Started - Pre-configured Setup](exercises/ex0/)); the list is what you would need to reproduce the exercises in your own environment:
 
 - An **SAP Integration Suite** tenant with the **Premium Edition** (or Enhanced Edition where indicated). The AI features used in this session are available only with the Premium and Enhanced Editions, offered as a free promotion until the January 2027 software release. See SAP Notes [2903776](https://me.sap.com/notes/2903776) (service plans) and [3463620](https://me.sap.com/notes/3463620) (AI feature availability by region).
 - The **Cloud Integration** and **API Management** capabilities activated, and the **Integration Cell** runtime provisioned.
@@ -33,7 +33,7 @@ To follow the exercises in this repository you need:
 
 ## Exercises
 
-- [Getting Started - System Setup](exercises/ex0/)
+- [Getting Started - Pre-configured Setup](exercises/ex0/)
 - [Exercise 1 - Create and Govern MCP Servers](exercises/ex1/)
     - [Exercise 1.1 - Create an MCP Server from an HTTP Endpoint (Autobahn)](exercises/ex1#exercise-11-create-an-mcp-server-from-an-http-endpoint-autobahn)
     - [Exercise 1.2 - Create an MCP Server Using a Remote MCP Server as the Source (Federation)](exercises/ex1#exercise-12-create-an-mcp-server-using-a-remote-mcp-server-as-the-source-federation)
@@ -42,7 +42,7 @@ To follow the exercises in this repository you need:
 - [Exercise 2 - AI-based Memory Profiling of an Existing iFlow](exercises/ex2/)
 - [Exercise 3 - Optimize Groovy Scripts with AI](exercises/ex3/)
 
-> **Note on structure:** The session's topics map to the folders as follows — *System setup* → `ex0`; *MCP servers creation* (sub-exercises 1.1–1.4) → `ex1`; *AI-based Memory Profiling* → `ex2`; *Optimize Groovy Scripts with AI* → `ex3`.
+> **Note on structure:** The session's topics map to the folders as follows — *Pre-configured setup* → `ex0`; *MCP servers creation* (sub-exercises 1.1–1.4) → `ex1`; *AI-based Memory Profiling* → `ex2`; *Optimize Groovy Scripts with AI* → `ex3`.
 
 ## How to obtain support
 
