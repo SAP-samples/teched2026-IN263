@@ -1,0 +1,12 @@
+# hands-on-recorder
+.env
+.env-auth-state-*
+.venv/
+__pycache__/
+*.pyc
+
+# IN263: commit screenshots (images/) only — keep recordings, snapshots, and local tooling out of the repo
+.venv-recorder/
+.playwright/
+exercises/*/recording.json
+exercises/*/snapshots/
