@@ -1,6 +1,6 @@
 # Exercise 1 - Create and Govern MCP Servers
 
-In this exercise, you will create **MCP (Model Context Protocol) servers** in SAP Integration Suite from three different sources, deploy them, consume them from an AI client, and monitor their usage. An MCP server is an artifact you create in SAP Integration Suite to expose your enterprise APIs and data to AI agents as callable **tools** — through a single, governed endpoint on which you can enforce security and traffic policies, keep an audit trail, and manage the full lifecycle.
+In this exercise, you will create **MCP (Model Context Protocol) servers** in SAP Integration Suite from two different sources, deploy them, inspect and consume them with the MCP Inspector, and monitor their usage. An MCP server is an artifact you create in SAP Integration Suite to expose your enterprise APIs and data to AI agents as callable **tools** — through a single, governed endpoint on which you can enforce security and traffic policies, keep an audit trail, and manage the full lifecycle.
 
 > **References**
 > - [MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/model-context-protocol-mcp)
@@ -14,7 +14,7 @@ Common prerequisites for all sub-exercises (see also [Getting Started](../ex0/RE
 - **API Management** capability activated. See [Activate and Configure the API Management Capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/activate-and-configure-api-management-capability).
 - **Integration Cell** runtime activated. See [Activate Integration Cell](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/activate-integration-cell).
 - The `PI_Integration_Developer` role collection assigned to your user.
-- An **integration package** to hold your artifacts. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package). You can reuse one package for all three MCP servers in this exercise.
+- An **integration package** to hold your artifacts. Create your own package named **`IN263 User <number>`** (replace `<number>` with your assigned participant number — see [Getting Started](../ex0/README.md)); the instructor's reference package is **`IN263 User XX`**. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package). You can reuse the same package for both MCP servers in this exercise.
 
 > **General notes that apply to every MCP server you create:**
 > - The OpenAPI specification used as a source must be a version between **3.0.0 and 3.0.3**. Swagger 2.0 and earlier are not supported. (When you import an OData `$metadata` (EDMX) file into an API artifact, Integration Suite converts it to OpenAPI 3.0.0 automatically.)
@@ -25,88 +25,7 @@ Common prerequisites for all sub-exercises (see also [Getting Started](../ex0/RE
 
 ---
 
-## Exercise 1.1 Create an MCP Server from an API Artifact (S/4HANA Cloud)
-
-After completing these steps you will have exposed a deployed API artifact (here, the S/4HANA Cloud **Sales Order** OData API `API_SALES_ORDER_SRV`) as an MCP server, so that AI agents can discover and invoke its operations as tools.
-
-This sub-exercise has two parts: first you **create and deploy the API artifact** from an S/4HANA Cloud OData service (1.1.1), then you **create and deploy the MCP server** from that API artifact (1.1.2).
-
-> **References**
-> - [Create an API Artifact Using a Destination](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-api-artifact-by-referring-to-destination)
-> - [Create an MCP Server from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-api-artifact)
-
-**Additional prerequisites for this method:**
-
-- Only **OData and REST** API artifacts **deployed on the Integration Cell runtime** can be exposed as an MCP server.
-- Access to an S/4HANA Cloud OData service (here `API_SALES_ORDER_SRV`), reachable from SAP BTP, with a communication user/arrangement that permits the operations you want to expose. See [SAP Business Accelerator Hub](https://api.sap.com/) for the API and its metadata.
-- A **BTP destination** to the S/4HANA Cloud system, created in the **same subaccount that hosts your SAP Integration Suite / Integration Cell**, with the label `IntegrationCell.Include = true` so the Integration Cell can discover it. (This is the same kind of destination used in Exercise 1.2; see the destination steps there.)
-
-> **Note on authentication:** The official documentation states that only APIs with **OAuth-based authentication** can be used to create an MCP server. In practice, depending on your tenant edition and release, an API artifact backed by a **Basic authentication** destination may also work. If MCP-server creation rejects your API, reconfigure the destination to use OAuth 2.0 against the S/4HANA Cloud token endpoint (the SAP_COM scenario on the S/4 side supports OAuth) and redeploy the API.
-
-> **Note on discovering a full API catalog ("Discoverable Systems"):** The Add API wizard also offers a *Discoverable Systems* tab that lets you browse an entire S/4HANA Cloud API catalog instead of a single endpoint. That tab is populated from a **BTP global-account formation (system landscape)** that groups your Integration Suite and S/4HANA Cloud systems — it is **not** the in-app *Settings → Integrations → System* tab (which is only for SAP Process Orchestration systems). Setting up a formation requires global-account administrator rights and is out of scope here; this exercise uses the simpler **destination** route, which produces the same kind of deployable API artifact. See [Create an API Artifact Using a Discoverable System](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-api-artifact-by-referring-to-discoverable-system) if your landscape already has a formation.
-
-### Exercise 1.1.1 Create and Deploy the API Artifact
-
-1. Log on to SAP Integration Suite and choose **Design → Integrations and APIs**.
-
-2. Open (or create) your integration package and choose **Edit**. On the **Artifacts** tab, choose **Add → API**.
-
-3. In the **Add API** wizard:
-   - **Select Runtime Profile:** choose **Integration Cell** (not Cloud Integration), then **Next**. (Selecting Integration Cell removes the "Select API Type" step.)
-   - **Select a Method:** choose **API Provider**, then **Next**.
-   - **Select API Provider:** open the **Destinations** tab. Your labeled destination (e.g. `IN263_S4HC_SalesOrder`) appears here because it carries `IntegrationCell.Include = true`. Select it and choose **Next**.
-
-4. In **Provide API Details**, fill in:
-
-   | Field | Value |
-   | --- | --- |
-   | **Name / ID** | e.g. `IN263_SalesOrder_API` |
-   | **API Provider** | Pre-filled with the selected destination |
-   | **Relative URL** | The OData service path, e.g. `/sap/opu/odata/sap/API_SALES_ORDER_SRV` |
-   | **Service Type** | **ODATA** |
-   | **API Base Path** | Defaults from the name, e.g. `/IN263_SalesOrder_API` |
-   | **Runtime Profile / Virtual Host** | **Integration Cell** / the pre-filled Integration Cell virtual host |
-
-   > **Tip (avoid a doubled path):** The effective backend call is the destination's base URL plus this **Relative URL**. If the destination URL already includes the full service path, keep the destination at the **host only** (e.g. `https://my-s4-system.s4hana.cloud.sap`) and put the service path in the Relative URL, so you don't end up calling `.../API_SALES_ORDER_SRV/sap/opu/odata/sap/API_SALES_ORDER_SRV`.
-
-5. Choose **Next**. The optional **Generate API Specification** step (AI) appears — you can skip it. Choose **Add** to create the API artifact. It opens in the API editor with **Status: Not Deployed**.
-
-6. The new API has **no resources** yet (it is just a proxy to the destination). To populate operations, open the **Resources** tab, choose **Edit**, then **Import**, and upload the OData service's **`$metadata` (EDMX)** file. Integration Suite generates all entity sets as resources (GET/POST/PUT/DELETE and navigation properties) and converts the artifact to OpenAPI 3.0.0. Review and **Save**.
-
-   > You can obtain the EDMX from the service's `$metadata` endpoint (`<service-url>/$metadata`) in an authenticated session, or download it from SAP Business Accelerator Hub.
-
-7. Choose **Deploy**, confirm the **Integration Cell** runtime profile and virtual host, and choose **Deploy**. **Wait** until the header shows **Status: Deployed … Runtime Status: STARTED** (do not reload/navigate while it is submitting).
-
-### Exercise 1.1.2 Create and Deploy the MCP Server
-
-1. Go back to your integration package (**Design → Integrations and APIs → your package**) and choose **Edit**.
-
-2. On the **Artifacts** tab, choose **Add → MCP Server**. The **Add MCP Server** dialog opens.
-
-3. **Select Source Type:** choose **API** — *"Create an MCP server from an API artifact deployed on Integration Cell"* — and choose **Next**.
-
-4. In **Provide MCP Details**, choose the value-help icon next to the **API** field and select your deployed API (e.g. `IN263_SalesOrder_API`). Then fill in:
-
-   | Field | Value |
-   | --- | --- |
-   | **API** | The deployed Integration Cell API artifact |
-   | **Name / ID** | e.g. `IN263_SalesOrder_MCP` (alphanumeric and `_`) |
-   | **MCP Path** | The path prefix under which the server is exposed, e.g. `/SalesOrderMCP`. Must not be empty or just `/`. |
-   | **Version** | Optional, e.g. `1.0.0` |
-   | **Runtime Profile** | **Integration Cell** |
-   | **Virtual Host** | The pre-filled Integration Cell virtual host |
-
-5. Choose **Next** to proceed to **Create Tools**. Select the API resources (operations) you want to expose as MCP tools by checking each one; keep the selection within the per-server tool limit shown.
-
-6. Choose **Add** to create the MCP server. It opens in the editor view.
-
-7. (Optional) Choose **Edit** to refine the configuration. Use the **MCP Configuration** tab to adjust **Source, Tools, Resources, and Prompts**, and the **Policies** tab to configure traffic-management and security policies. See [Configure an MCP Server Created from an API Artifact](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-mcp-server-created-from-api-artifact).
-
-8. **Deploy** the MCP server (see [Deploy an MCP Server](#deploy-an-mcp-server) below) and wait for **Runtime Status: STARTED**. The **Overview** tab then shows the public **MCP URL** (virtual host + MCP Path, e.g. `https://<virtual-host>/SalesOrderMCP`) — this is the endpoint AI clients connect to in Exercise 1.4.
-
----
-
-## Exercise 1.2 Create an MCP Server from an HTTP Endpoint (Autobahn)
+## Exercise 1.1 Create an MCP Server from an HTTP Endpoint (Autobahn)
 
 After completing these steps you will have exposed an external REST-based service (here referred to as **Autobahn** — for example, a public road/traffic HTTP API) as an MCP server by providing its OpenAPI specification.
 
@@ -123,7 +42,7 @@ After completing these steps you will have exposed an external REST-based servic
 
 2. From the left navigation pane, choose **Design → Integrations and APIs**.
 
-3. Select your integration package and choose **Edit**.
+3. Select your **`IN263 User <number>`** integration package and choose **Edit**.
 
 4. On the package details page, choose **Artifacts**, and under **Add**, select **MCP Server**. The **Create MCP Server** dialog opens.
 
@@ -154,7 +73,7 @@ After completing these steps you will have exposed an external REST-based servic
 
    > **Note:** AI-assisted OpenAPI generation requires the Premium or Enhanced Edition (free promotion until the January 2027 release).
 
-8. In the **Create Tools** step, select the API resources you want to expose as MCP tools (up to 30). If no resources are available, you can skip this step.
+8. In the **Create Tools** step, select the API resources you want to expose as MCP tools (keep within the per-server tool limit shown in the wizard). If no resources are available, you can skip this step.
 
 9. Choose **Create** to finalize the MCP server. It opens in the editor view.
 
@@ -164,7 +83,7 @@ After completing these steps you will have exposed an external REST-based servic
 
 ---
 
-## Exercise 1.3 Create an MCP Server Using a Remote MCP Server as the Source (Federation)
+## Exercise 1.2 Create an MCP Server Using a Remote MCP Server as the Source (Federation)
 
 After completing these steps you will have created an MCP server that **proxies a remote (third-party) MCP server**, so that SAP Integration Suite acts as a managed governance layer in front of it — applying security and traffic policies while leaving the remote server unchanged.
 
@@ -182,7 +101,7 @@ After completing these steps you will have created an MCP server that **proxies 
 
 2. From the left navigation pane, choose **Design → Integrations and APIs**.
 
-3. Select your integration package and choose **Edit**.
+3. Select your **`IN263 User <number>`** integration package and choose **Edit**.
 
 4. On the package details page, choose **Artifacts**, and under **Add**, select **MCP Server**. The **Create MCP Server** dialog opens.
 
@@ -206,7 +125,7 @@ After completing these steps you will have created an MCP server that **proxies 
    | **Runtime Profile** | The **Integration Cell** runtime node. |
    | **Virtual Host** | Review the virtual host URL. |
 
-8. In the **Create Tools** step, select the checkboxes next to the tools you want to expose from the remote MCP server (up to 30).
+8. In the **Create Tools** step, select the checkboxes next to the tools you want to expose from the remote MCP server (keep within the per-server tool limit shown in the wizard).
 
 9. Choose **Add** to finalize and create the MCP server.
 
@@ -218,7 +137,7 @@ After completing these steps you will have created an MCP server that **proxies 
 
 ### Deploy an MCP Server
 
-Every MCP server you create in 1.1–1.3 must be deployed to the Integration Cell runtime before it can be consumed.
+Every MCP server you create in 1.1–1.2 must be deployed to the Integration Cell runtime before it can be consumed.
 
 > **Reference:** [Deploy an MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/deploy-mcp-server)
 
@@ -234,22 +153,19 @@ Every MCP server you create in 1.1–1.3 must be deployed to the Integration Cel
 
 ---
 
-## Exercise 1.4 Configure and Use the MCP Servers in Joule Work Desktop
+## Exercise 1.3 Inspect and Consume the MCP Servers with MCP Inspector
 
-After completing these steps you will have connected an AI client (**Joule Work Desktop**) to one of your deployed MCP servers so that Joule can invoke its tools during conversations.
+After completing these steps you will have connected the **MCP Inspector** — the official developer tool for the Model Context Protocol — to one of your deployed MCP servers, listed its tools and resources, and invoked a tool to confirm the end-to-end flow through the governed Integration Cell endpoint.
 
 > **References**
 > - [Invoke the MCP Server Endpoint URL](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-endpoint-url)
 > - [Invoke an MCP Server Artifact by Obtaining Credentials via Developer Hub](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-artifact-by-obtaining-credentials-via-developer-hub)
-> - [Invoke an MCP Server from Joule Work Desktop](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-from-joule-work-desktop)
-
-> **Note:** Joule Work Desktop is part of an SAP **Early Adopter Care (EAC)** program and is not available to users outside that program. If you do not have access, you can instead invoke the MCP endpoint from any REST/MCP client using the credentials obtained below.
+> - [MCP Inspector (modelcontextprotocol/inspector)](https://github.com/modelcontextprotocol/inspector)
 
 **Additional prerequisites for this method:**
 
-- An MCP server **created and deployed** on the Integration Cell runtime (from 1.1–1.3).
-- **Joule Work Desktop** installed on your machine. See [Setting Up Joule Work Desktop](https://help.sap.com/docs/joule).
-- Your user is registered in the authorization server (for example, SAP Cloud Identity Services – Identity Authentication), because Joule Work Desktop triggers a user-token fetch flow when connecting. See [Accessing an MCP Server Using an IdP User Token](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/consume-mcp-server-using-idp-user-token).
+- An MCP server **created and deployed** on the Integration Cell runtime (from 1.1–1.2), with its runtime status **STARTED**.
+- **Node.js** installed locally (the Inspector runs via `npx`; no separate installation needed).
 
 **Step A - Obtain the endpoint URL and credentials (via Developer Hub, recommended):**
 
@@ -259,29 +175,43 @@ After completing these steps you will have connected an AI client (**Joule Work 
 
 3. **Subscribe** to the product that contains your MCP server artifact. See [Subscribe to a Product to Consume APIs and Events in an Application](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/subscribe-to-product).
 
-4. Once the subscription is created, open the **Overview** tab of your application and copy the **Key** (client ID), **Secret** (client secret), and **Token URL**. These are used to generate the OAuth (JWT) token required to call the MCP server.
+4. Once the subscription is created, open the **Overview** tab of your application and copy the **Key** (client ID), **Secret** (client secret), and **Token URL**. These are used to obtain the OAuth (JWT) access token required to call the MCP server.
 
-5. Note the MCP server **endpoint URL** exposed by your Integration Cell runtime (also visible in **Monitor → Integrations and APIs → Manage Integration Content → Endpoints** — see Exercise 1.5).
+5. Note the MCP server **endpoint URL** exposed by your Integration Cell runtime (it is shown on the MCP server's **Overview** tab as the **MCP URL**, and in **Monitor → Integrations and APIs → Manage Integration Content → Endpoints** — see Exercise 1.4).
 
    > Obtaining credentials via the **Process Integration Runtime** is also possible but is considered an anti-pattern; prefer Developer Hub.
 
-**Step B - Add the MCP server as a connector in Joule Work Desktop:**
+**Step B - Obtain an access token:**
 
-6. In Joule Work Desktop, add a connector following [Adding a Connector](https://help.sap.com/docs/joule) in the Joule Work Desktop guide.
+6. Using the **Key**, **Secret**, and **Token URL** from Step A, request an OAuth 2.0 **client-credentials** token. For example:
 
-7. When prompted, enter the **MCP server endpoint URL** from Step A.
+   ```bash
+   curl -s -u "<Key>:<Secret>" "<Token URL>?grant_type=client_credentials"
+   ```
 
-8. Provide the authentication details:
-   - For **XSUAA** authentication, both **Client ID** and **Client Secret** are required.
-   - For **external** authentication methods (for example, Okta, IAS), **Client ID** is required and **Client Secret** is optional.
+   Copy the `access_token` value from the response — this Bearer token authorizes the Inspector's calls to the MCP server.
 
-9. Save the connector. The MCP server's tools are now available in Joule Work Desktop and can be invoked by Joule during conversations.
+**Step C - Connect with MCP Inspector:**
 
-10. Test it: ask Joule a question that should trigger one of your tools (for example, "look up business partner 1000000" against the S/4HANA Cloud MCP server from 1.1) and confirm that Joule calls the tool and returns the result.
+7. Launch the Inspector locally. It starts a small local web app and opens it in your browser:
+
+   ```bash
+   npx @modelcontextprotocol/inspector
+   ```
+
+8. In the Inspector UI, set **Transport Type** to **Streamable HTTP** and enter your MCP server's **endpoint URL** (the MCP URL from Step A).
+
+9. Add the **Authorization** header with the token from Step B — set the header `Authorization` to `Bearer <access_token>` (under the Inspector's authentication / headers configuration).
+
+10. Choose **Connect**. Once connected, use **List Tools** and **List Resources** to see what the server exposes.
+
+11. Select a tool and **invoke** it with sample arguments — for example, a traffic-lookup tool from the Autobahn server (1.1) or a tool proxied from the remote server (1.2) — and confirm that the Inspector shows the response returned through the Integration Cell endpoint.
+
+> **Alternative:** If you have access to the SAP **Early Adopter Care (EAC)** program, you can instead consume the MCP server from **Joule Work Desktop** by adding it as a connector with the same endpoint URL and credentials. See [Invoke an MCP Server from Joule Work Desktop](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-from-joule-work-desktop).
 
 ---
 
-## Exercise 1.5 Monitor the MCP Servers' Usage
+## Exercise 1.4 Monitor the MCP Servers' Usage
 
 After completing these steps you will know where to check the deployment status, runtime logs, endpoints, and usage analytics of your MCP servers.
 
@@ -299,7 +229,7 @@ After completing these steps you will know where to check the deployment status,
 
 4. Select your MCP server. On the right, the **Integration Content Details** show:
    - Header info: **Deployed on**, **Deployed by**, **Version**, **ID**, **Package**, and actions **Restart / Undeploy / Download**.
-   - **Endpoints** — the exposed URLs; use the **Copy** button to copy the endpoint (the one you used in Exercise 1.4).
+   - **Endpoints** — the exposed URLs; use the **Copy** button to copy the endpoint (the one you used in Exercise 1.3).
    - **Status Details** — whether the artifact is deployed or undeployed.
    - **Log Configuration** — set the **Log Level** (None, Info, Error, Debug, Trace) to control the detail recorded in the message processing log. Use **Trace**/**Debug** only in test environments; both expire automatically (Debug after 24 hours, Trace after ~10 minutes).
 
@@ -311,6 +241,6 @@ After completing these steps you will know where to check the deployment status,
 
 ## Summary
 
-You have created MCP servers from an API artifact, an HTTP endpoint, and a remote MCP server (federation); deployed them to the Integration Cell runtime; obtained credentials and consumed one from Joule Work Desktop; and monitored their status, endpoints, logs, and usage. In doing so you experienced how SAP Integration Suite acts as a **governed gateway** between AI agents and your enterprise integrations.
+You have created MCP servers from an HTTP endpoint (Autobahn) and a remote MCP server (federation); deployed them to the Integration Cell runtime; obtained credentials and inspected and consumed one with the MCP Inspector; and monitored their status, endpoints, logs, and usage. In doing so you experienced how SAP Integration Suite acts as a **governed gateway** between AI agents and your enterprise integrations.
 
 Continue to - [Exercise 2 - AI-based Memory Profiling of an Existing iFlow](../ex2/README.md)

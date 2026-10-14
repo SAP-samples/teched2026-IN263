@@ -33,6 +33,10 @@ After completing these steps you will have confirmed that the right capabilities
 
 4. Log off and log on again so that the newly assigned roles take effect.
 
+5. Create your own **integration package** to hold the artifacts you build in this session. In **Design → Integrations and APIs**, choose **Create** and name the package **`IN263 User <number>`**, replacing `<number>` with your assigned participant number (for example, `IN263 User 07`). See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package).
+
+   > **Reference package:** The instructor maintains a reference package named **`IN263 User XX`** that contains completed versions of the artifacts. Use it to compare against your own work. Throughout Exercises 1–3, wherever a step says "your `IN263 User <number>` package", use the package you create here.
+
 ## Exercise 0.2 - Activate the Artificial Intelligence Features
 
 After completing these steps you will have activated the AI features used in Exercises 2 and 3. You must be a **tenant administrator** (`PI_Administrator`) to do this.
