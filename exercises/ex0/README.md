@@ -65,7 +65,7 @@ A tenant administrator (`PI_Administrator`) has already activated the AI feature
 
 ## The OpenSwissData destination (for Exercise 1.2)
 
-[Exercise 1.2](../ex1/README.md#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source-federation) federates a public remote MCP server. The destination it needs — **`openswissdata`** — has already been created for you in the **SAP BTP Cockpit** of the subaccount that hosts SAP Integration Suite (**Connectivity → Destinations → Create Destination → From Scratch**). To reproduce it in your own subaccount, create a destination with these values:
+[Exercise 1.2](../ex1/README.md#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source) uses a public remote MCP server. The destination it needs — **`openswissdata`** — has already been created for you in the **SAP BTP Cockpit** of the subaccount that hosts SAP Integration Suite (**Connectivity → Destinations → Create Destination → From Scratch**). To reproduce it in your own subaccount, create a destination with these values:
 
 | Field | Value |
 | --- | --- |
@@ -97,6 +97,6 @@ This is the one setup step **you** perform — the rest of the exercises build a
 
 ## Summary
 
-You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also logged in and created your personal **`IN263 User 0XX`** package to work in.
+You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the remote MCP server exercise — and how to reproduce it all in your own projects. You have also logged in and created your personal **`IN263 User 0XX`** package to work in.
 
 Continue to - [Exercise 1 — Create and Govern MCP Servers](../ex1/README.md)
