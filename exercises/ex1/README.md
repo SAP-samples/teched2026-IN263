@@ -187,9 +187,9 @@ Both MCP servers you create in 1.1 and 1.2 are deployed the same way: from the a
 
 ---
 
-## Exercise 1.3 — Inspect and Consume the MCP Servers with MCP Inspector
+## Exercise 1.3 — Inspect and Consume the MCP Servers with MCP Inspector (Optional)
 
-In this sub-exercise you will connect the **MCP Inspector** — the official developer tool for the Model Context Protocol — to one of your deployed MCP servers, list its tools, and invoke one to confirm the end-to-end flow through the governed Integration Cell endpoint.
+In this optional sub-exercise you will connect the **MCP Inspector** — the official developer tool for the Model Context Protocol — to one of your deployed MCP servers, list its tools, and invoke one to confirm the end-to-end flow through the governed Integration Cell endpoint.
 
 > **References**
 > - [Invoke the MCP Server Endpoint URL](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-endpoint-url)
@@ -263,7 +263,7 @@ In this sub-exercise you will connect the **MCP Inspector** — the official dev
 
 ## Exercise 1.4 — Monitor the MCP Servers' Usage
 
-In this sub-exercise you will find where to check the deployment status, runtime logs, endpoints, and usage analytics of your MCP servers.
+In this sub-exercise you will find where to check the deployment status, runtime logs, endpoints, and usage analytics of your MCP servers. If you didn't take the previous sub-execise (Optional), you can explore other MCP server's usage data deployed in the same tenant.
 
 > **References**
 > - [Monitor APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/monitor-apis)

@@ -1,10 +1,10 @@
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2026-IN263)](https://api.reuse.software/info/github.com/SAP-samples/teched2026-IN263)
 
-# IN263 - Design Trustworthy Integrations and APIs for the AI Era
+# IN263 - AI-supported integrations: From design quality to agent readiness
 
 ## Description
 
-This repository contains the material for the SAP TechEd 2026 session called **IN263 - Design Trustworthy Integrations and APIs for the AI Era**.
+This repository contains the material for the SAP TechEd 2026 session called **IN263 - AI-supported integrations: From design quality to agent readiness**.
 
 ## Overview
 
@@ -17,8 +17,6 @@ By the end of the session you will have:
 - Run an AI-based memory profiling session on an existing integration flow and applied the recommended fixes.
 - Optimized a Groovy script with Generative AI.
 
-> **Disclaimer**
-> These exercises are a first draft based on the official SAP Integration Suite product documentation (see links in each exercise). SAP Integration Suite evolves continuously — always cross-check the live documentation at [help.sap.com](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/) and your tenant's UI, as labels, availability, and steps may change. Screenshots will be added in a later revision.
 
 ## Requirements
 
@@ -37,18 +35,17 @@ To follow the exercises in this repository you need the following. In the TechEd
 - [Exercise 1 - Create and Govern MCP Servers](exercises/ex1/)
     - [Exercise 1.1 - Create an MCP Server from an HTTP Endpoint (Autobahn)](exercises/ex1#exercise-11--create-an-mcp-server-from-an-http-endpoint-autobahn)
     - [Exercise 1.2 - Create an MCP Server Using a Remote MCP Server as the Source](exercises/ex1#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source)
-    - [Exercise 1.3 - Inspect and Consume the MCP Servers with MCP Inspector](exercises/ex1#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector)
+    - [Exercise 1.3 - Inspect and Consume the MCP Servers with MCP Inspector (Optional)](exercises/ex1#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector)
     - [Exercise 1.4 - Monitor the MCP Servers' Usage](exercises/ex1#exercise-14--monitor-the-mcp-servers-usage)
 - [Exercise 2 - AI-based Memory Profiling of an Existing iFlow](exercises/ex2/)
 - [Exercise 3 - Optimize Groovy Scripts with AI](exercises/ex3/)
 
-> **Note on structure:** The session's topics map to the folders as follows — *Pre-configured setup* → `ex0`; *MCP servers creation* (sub-exercises 1.1–1.4) → `ex1`; *AI-based Memory Profiling* → `ex2`; *Optimize Groovy Scripts with AI* → `ex3`.
 
 ## Additional Relevant Sessions
 
 You can also gain some further knowledge around SAP Integration Suite and its capabilities by attending the following SAP TechEd Hands-on Workshop sessions:
 
-- [IN261 | Securely connect enterprise tools to an AI agent with the MCP Gateway | Hands-on Workshop](https://github.com/SAP-samples/teched2026-IN261/)
+- [IN261 | Model context protocol (MCP) unlocked: Enable governed access to AI agents | Hands-on Workshop](https://www.sap.com/events/teched/berlin/flow/sap/te26/catalog/page/catalog/session/1786027688241001k1kf)
 - [IN262 | Build an integration scenario from scratch with AI assistance at every step | Hands-on Workshop](http://sap.com/events/teched/berlin/flow/sap/te26/catalog/page/catalog/session/1786027888165001UXeS)
 - [IN163 | Build your own event-driven scenario with advanced event mesh | Hands-on Workshop](https://www.sap.com/events/teched/berlin/flow/sap/te26/catalog/page/catalog/session/1786029069284001qBM4)
 
