@@ -6,6 +6,21 @@ The one thing you do set up yourself is your personal integration package — se
 
 > **Reference:** [Artificial Intelligence (SAP Integration Suite)](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/artificial-intelligence)
 
+## Accessing the system
+
+To reach the SAP Integration Suite tenant used in this session:
+
+1. Open [https://url.sap/vutrsb](https://url.sap/vutrsb) in your browser.
+
+2. Log on with the workshop user assigned to you:
+
+   | Field | Value |
+   | --- | --- |
+   | **User** | `User<number>` — replace `<number>` with your assigned participant number (for example, `User007`) |
+   | **Password** | `Welcome1` |
+
+   > Use the same participant `<number>` throughout the session — for your login user, for your **`IN263 User <number>`** package, and in the artifact names (for example, `OpenSwissData_MCP_<number>`).
+
 ## Tenant, capabilities, and runtime (already provisioned)
 
 The hands-on tenant has been provisioned with the following. To run these exercises in your own environment, you would need the same:
