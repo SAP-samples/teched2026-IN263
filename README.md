@@ -35,7 +35,7 @@ To follow the exercises in this repository you need the following. In the TechEd
 - [Exercise 1 - Create and Govern MCP Servers](exercises/ex1/)
     - [Exercise 1.1 - Create an MCP Server from an HTTP Endpoint (Autobahn)](exercises/ex1#exercise-11--create-an-mcp-server-from-an-http-endpoint-autobahn)
     - [Exercise 1.2 - Create an MCP Server Using a Remote MCP Server as the Source](exercises/ex1#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source)
-    - [Exercise 1.3 - Inspect and Consume the MCP Servers with MCP Inspector (Optional)](exercises/ex1#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector)
+    - [Exercise 1.3 - Inspect and Consume the MCP Servers with MCP Inspector (Optional)](exercises/ex1#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional)
     - [Exercise 1.4 - Monitor the MCP Servers' Usage](exercises/ex1#exercise-14--monitor-the-mcp-servers-usage)
 - [Exercise 2 - AI-based Memory Profiling of an Existing iFlow](exercises/ex2/)
 - [Exercise 3 - Optimize Groovy Scripts with AI](exercises/ex3/)

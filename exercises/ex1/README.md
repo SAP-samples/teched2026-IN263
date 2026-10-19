@@ -81,7 +81,7 @@ In this sub-exercise you will expose an external REST service — the public **A
 
    <br>![Create Tools — select the four Autobahn tools](/exercises/ex1/images/ex1_05_create_tools_http.png)
 
-7. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector) simple — a username and password instead of an OAuth token flow.
+7. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) simple — a username and password instead of an OAuth token flow.
 
    <br>![Policies tab — set Authentication to Basic only](/exercises/ex1/images/ex1_06_policies_basic_auth.png)
 
@@ -153,11 +153,11 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
 
    <br>![Select the OpenSwissData tools](/exercises/ex1/images/ex1_10_create_tools_remote.png)
 
-8. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector) simple.
+8. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) simple.
 
    <br>![Policies tab — set Authentication to Basic only](/exercises/ex1/images/ex1_11_policies_basic_auth_remote.png)
 
-9. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**. You will inspect and invoke its proxied tools in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector) — for example, `tariff_lookup` with `hs8 = 8471.3000`.
+9. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**. You will inspect and invoke its proxied tools in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) — for example, `tariff_lookup` with `hs8 = 8471.3000`.
 
 ---
 
@@ -281,7 +281,7 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 4. Select your MCP server. On the right, the **Integration Content Details** show:
    - Header info: **Deployed on**, **Deployed by**, **Version**, **ID**, **Package**, and actions **Restart / Undeploy / Download**.
-   - **Endpoints** — the exposed URLs; use **Copy** to copy the endpoint (the one you used in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector)).
+   - **Endpoints** — the exposed URLs; use **Copy** to copy the endpoint (the one you used in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional)).
    - **Status Details** — whether the artifact is deployed or undeployed.
    - **Log Configuration** — set the **Log Level** (None, Info, Error, Debug, Trace). Use **Trace**/**Debug** only in test environments; both expire automatically (Debug after 24 hours, Trace after ~10 minutes).
 
