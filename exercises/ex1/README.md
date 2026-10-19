@@ -291,7 +291,11 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 ### Step 2: Analyze usage trends
 
-6. Open the **Analyze** dashboards for APIs and MCP servers to review usage, performance, and traffic. See [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers). If **Conversational Analytics** is enabled, you can query usage in natural language via the AI Assistant — see [Analyze APIs with AI Assistance](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-with-ai-assistance).
+6. Choose **Analyze** from the left navigation to open the analytics dashboards. At the top, set **Runtime** to **Integration Cell** and **Artifact Type** to **MCP Server** so the view focuses on your MCP servers.
+
+   <br>![Analyze — Runtime: Integration Cell, Artifact Type: MCP Server](/exercises/ex1/images/ex1_19_analyze.png)
+
+7. Explore the KPI tiles (**Total MCP Calls**, **MCP Response Time**, **Total MCP Errors**) and the **MCP Charts** below them. Use the tabs (**Overview**, **Health**, **Usage**, **Anomalies**, **Predictions**) and the chart filters (**All MCP Servers** or **Select MCP Servers from the list**) to review usage, performance, and traffic for your deployed MCP servers. See [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers).
 
 ## Summary
 
