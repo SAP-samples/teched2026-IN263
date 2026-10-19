@@ -1,42 +1,60 @@
-# Exercise 3 - Optimize Groovy Scripts with AI
+# Exercise 3 — Optimize Groovy Scripts with AI
 
 In this exercise, you will use the **Script Optimization** feature to improve a Groovy script with Generative AI. Script Optimization applies GenAI best practices to your Groovy scripts in the script editor, focusing on **resource usage** (memory and CPU), and produces an **AI Review Report** with concrete recommendations and an improved version of the script that you can apply.
+
+## Overview
+
+Groovy scripts are where integration flows most often leak memory or burn CPU — a map rebuilt inside a loop, the whole payload held as a `String`, an inefficient parse. **Script Optimization** sends your script to Generative AI, which returns a structured **AI Review Report**: specific recommended changes with code snippets, plus a complete improved script you can drop in. It pairs naturally with Exercise 2 — a memory-profiling hotspot on a Groovy step links straight into this editor.
+
+> [!NOTE]
+> This exercise optimizes a Groovy script inside a flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)). If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
 
 > **Reference:** [Optimize Groovy Scripts with AI](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/optimize-groovy-scripts-with-ai)
 
 ## Prerequisites
 
-- The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence** — pre-configured for the session, see [Getting Started](../ex0/README.md)). See [Artificial Intelligence](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/artificial-intelligence).
-- Your user has the `WebToolingWorkspace.Write` role collection.
-- An integration flow that contains a **Groovy** script step (not JavaScript), in your **`IN263 User <number>`** package (see [Getting Started](../ex0/README.md)).
+- The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence**) — pre-configured for the session, see [Getting Started](../ex0/README.md).
+- Your user has the `WebToolingWorkspace.Write` role collection (pre-assigned — see [Getting Started](../ex0/README.md)).
+- An integration flow that contains a **Groovy** script step (not JavaScript), in your **`IN263 User 0XX`** package.
 
-> **Notes and limits:**
-> - This feature is available only with the **Premium** service plan of SAP Integration Suite (AI features free promotion until the January 2027 release). See SAP Notes [2903776](https://me.sap.com/notes/2903776) and [3463620](https://me.sap.com/notes/3463620).
+> [!IMPORTANT]
 > - The Groovy script must be **≤ 50 KB**.
-> - **Do not** expose sensitive information in scripts you submit to **Optimize**. See SAP Note [3542713](https://me.sap.com/notes/3542713).
-> - `Optimize` can be used repeatedly, but there is a per-minute rate limit and a monthly fair-usage token quota.
+> - **Do not** expose sensitive information in scripts you submit to **Optimize** (SAP Note [3542713](https://me.sap.com/notes/3542713)).
+> - **Optimize** can be used repeatedly, but there is a per-minute rate limit and a monthly fair-usage token quota.
+> - AI features require the Premium or Enhanced Edition (free promotion until the January 2027 release — SAP Notes [2903776](https://me.sap.com/notes/2903776) and [3463620](https://me.sap.com/notes/3463620)).
 
-## Exercise 3.1 Run the AI Review on a Groovy Script
+## Exercise 3.1 — Run the AI Review on a Groovy Script
 
-After completing these steps you will have generated an AI Review Report for your Groovy script.
+In this sub-exercise you will generate an AI Review Report for your Groovy script.
 
 1. In SAP Integration Suite, open the integration flow that contains the Groovy script, and open the **script editor in edit mode** (double-click the Groovy script step, then edit the script).
 
-   > If you arrived here from a memory profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.2](../ex2/README.md)). The script editor then opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
+   <br>![Open the Groovy script editor in edit mode](/exercises/ex3/images/ex3_01_script_editor.png)
+
+   > [!TIP]
+   > If you arrived here from a memory-profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.2](../ex2/README.md#exercise-22--review-the-memory-profiling-insights-and-apply-fixes)). The script editor opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
 
 2. Choose **Optimize** from the upper-right menu of the script editor.
 
-3. Generative AI inspects your script and displays an **AI Review Report**. If there is potential for improvement, the report contains:
-   - **Recommended Changes** — individual areas for improvement, each with a brief explanation and relevant code snippets.
-   - **Improved Script** — a complete script showing how to apply all the recommendations together.
+   <br>![Choose Optimize in the script editor](/exercises/ex3/images/ex3_02_optimize_button.png)
 
+3. Generative AI inspects your script and displays an **AI Review Report**. If there is potential for improvement, the report contains:
+
+   | Section | What it shows |
+   |---|---|
+   | **Recommended Changes** | Individual areas for improvement, each with a brief explanation and relevant code snippets. |
+   | **Improved Script** | A complete script showing how to apply all the recommendations together. |
+
+   <br>![AI Review Report with recommended changes and improved script](/exercises/ex3/images/ex3_03_ai_review_report.png)
+
+   > [!NOTE]
    > If the AI finds no issues, the report confirms: *"The provided Groovy script is well structured and follows best practices for memory and CPU optimization. No further improvements are necessary."*
 
 4. (Optional) Choose **Download** to save the AI report and the original script to your local file system.
 
-## Exercise 3.2 Apply the Recommendations
+## Exercise 3.2 — Apply the Recommendations
 
-After completing these steps you will have applied the AI's suggestions to your script.
+In this sub-exercise you will apply the AI's suggestions to your script.
 
 1. Review the **Recommended Changes** and the **Improved Script** in the report.
 
@@ -45,6 +63,8 @@ After completing these steps you will have applied the AI's suggestions to your 
    - **Full replacement:** copy the full script from the **Improved Script** section and paste it into the editor to replace the original.
 
 3. Once you are satisfied with your changes, choose **Apply**.
+
+   <br>![Apply the optimized script](/exercises/ex3/images/ex3_04_apply.png)
 
 4. (Recommended) Validate the optimized script by re-running the integration flow **Simulation** (see [Exercise 2](../ex2/README.md)) — ideally with **Memory Profiling** enabled — to confirm the resource-usage improvement before deployment.
 
@@ -70,6 +90,10 @@ Common error messages and what to do:
 
 ## Summary
 
-You have used Script Optimization to generate an AI Review Report for a Groovy script, reviewed the GenAI recommendations and improved script, applied them, and (optionally) validated the result through simulation with memory profiling.
+You have now used Script Optimization to improve a Groovy script with Generative AI. In doing so you have:
 
-This completes the IN263 hands-on exercises. You have experienced design-time quality for the AI era end to end: governed MCP servers as a secure gateway for AI agents, AI-based memory profiling to catch issues before deployment, and GenAI-assisted Groovy script optimization.
+- Generated an **AI Review Report** for a Groovy script.
+- Reviewed the GenAI **Recommended Changes** and **Improved Script**, and applied them.
+- (Optionally) validated the result through simulation with memory profiling.
+
+This completes the IN263 hands-on exercises. You have experienced design-time quality for the AI era end to end: **governed MCP servers** as a secure gateway for AI agents, **AI-based memory profiling** to catch issues before deployment, and **GenAI-assisted Groovy script optimization**.
