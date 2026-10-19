@@ -8,7 +8,7 @@ In this exercise, you will use the **Script Optimization** feature to improve a 
 
 - The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence** — pre-configured for the session, see [Getting Started](../ex0/README.md)). See [Artificial Intelligence](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/artificial-intelligence).
 - Your user has the `WebToolingWorkspace.Write` role collection.
-- An integration flow that contains a **Groovy** script step (not JavaScript), in your **`IN263 User <number>`** package (see [Getting Started](../ex0/README.md)).
+- An integration flow that contains a **Groovy** script step (not JavaScript), in your <b>IN263 User 0XX</b> package (see [Getting Started](../ex0/README.md)).
 
 > **Notes and limits:**
 > - This feature is available only with the **Premium** service plan of SAP Integration Suite (AI features free promotion until the January 2027 release). See SAP Notes [2903776](https://me.sap.com/notes/2903776) and [3463620](https://me.sap.com/notes/3463620).

@@ -16,10 +16,10 @@ To reach the SAP Integration Suite tenant used in this session:
 
    | Field | Value |
    | --- | --- |
-   | **User** | `User<number>` — replace `<number>` with your assigned participant number (for example, `User007`) |
+   | **User** | <b>User0XX</b> — replace `XX` with your assigned participant number, zero-padded to three digits (for example, `User007`) |
    | **Password** | `Welcome1` |
 
-   > Use the same participant `<number>` throughout the session — for your login user, for your **`IN263 User <number>`** package, and in the artifact names (for example, `OpenSwissData_MCP_<number>`).
+   > Use the same participant number throughout the session — for your login user, for your **`IN263 User 0XX`** package, and in the artifact names (for example, `OpenSwissData_MCP_0XX`). Your participant number is assigned to you by the instructor.
 
 ## Tenant, capabilities, and runtime (already provisioned)
 
@@ -83,12 +83,12 @@ Add the following two **Labels** (under **Additional Properties → Labels** / *
 
 This is the one setup step **you** perform — the rest of the exercises build artifacts inside your own package.
 
-1. In SAP Integration Suite, go to **Design → Integrations and APIs**, choose **Create**, and name the package **`IN263 User <number>`**, replacing `<number>` with your assigned participant number (for example, `IN263 User 07`). See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package).
+1. In SAP Integration Suite, go to **Design → Integrations and APIs**, choose **Create**, and name the package <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)*. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package).
 
-> **Reference package:** The instructor maintains a reference package named **`IN263 User XX`** that contains completed versions of the artifacts. Use it to compare against your own work. Throughout Exercises 1–3, wherever a step says "your `IN263 User <number>` package", use the package you create here.
+> **Reference package:** The instructor maintains a reference package named **`IN263 User XX`** that contains completed versions of the artifacts. Use it to compare against your own work. Throughout Exercises 1–3, wherever a step says "your `IN263 User 0XX` package", use the package you create here.
 
 ## Summary
 
-You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also created your personal **`IN263 User <number>`** package to work in.
+You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also created your personal **`IN263 User 0XX`** package to work in.
 
 Continue to - [Exercise 1 - Create and Govern MCP Servers](../ex1/README.md)

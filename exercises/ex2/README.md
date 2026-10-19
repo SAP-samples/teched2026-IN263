@@ -25,7 +25,7 @@ The recommendations are actionable, validated, and aligned with the official [In
 
 After completing these steps you will have run a simulation of (a subset of) your integration flow with memory profiling enabled.
 
-1. In SAP Integration Suite, choose **Design → Integrations and APIs**, open your **`IN263 User <number>`** package (see [Getting Started](../ex0/README.md)), open the **Artifacts** tab, and select the integration flow you want to profile to open it in the integration flow editor.
+1. In SAP Integration Suite, choose **Design → Integrations and APIs**, open your <b>IN263 User 0XX</b> package (see [Getting Started](../ex0/README.md)), open the **Artifacts** tab, and select the integration flow you want to profile to open it in the integration flow editor.
 
 2. Choose **Edit** (top right) to open the flow in **edit mode**. The simulation controls are only enabled in edit mode.
 

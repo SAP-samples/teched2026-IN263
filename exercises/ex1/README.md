@@ -14,7 +14,7 @@ Common prerequisites for all sub-exercises (see also [Getting Started](../ex0/RE
 - **API Management** capability activated. See [Activate and Configure the API Management Capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/activate-and-configure-api-management-capability).
 - **Integration Cell** runtime activated. See [Activate Integration Cell](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/activate-integration-cell).
 - The `PI_Integration_Developer` role collection assigned to your user.
-- An **integration package** to hold your artifacts. Create your own package named **`IN263 User <number>`** (replace `<number>` with your assigned participant number — see [Getting Started](../ex0/README.md)); the instructor's reference package is **`IN263 User XX`**. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package). You can reuse the same package for both MCP servers in this exercise.
+- An **integration package** to hold your artifacts. Create your own package named <b>IN263 User 0XX</b> *(replace XX with your assigned participant number — see [Getting Started](../ex0/README.md))*; the instructor's reference package is **`IN263 User XX`**. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package). You can reuse the same package for both MCP servers in this exercise.
 
 > **General notes that apply to every MCP server you create:**
 > - The OpenAPI specification used as a source must be a version between **3.0.0 and 3.0.3**. Swagger 2.0 and earlier are not supported. (When you import an OData `$metadata` (EDMX) file into an API artifact, Integration Suite converts it to OpenAPI 3.0.0 automatically.)
@@ -42,7 +42,7 @@ After completing these steps you will have exposed an external REST-based servic
 
 2. From the left navigation pane, choose **Design → Integrations and APIs**.
 
-3. Select your **`IN263 User <number>`** integration package and choose **Edit**.
+3. Select your <b>IN263 User 0XX</b> integration package and choose **Edit**.
 
 4. On the package details page, choose **Artifacts**, and under **Add**, select **MCP Server**. The **Create MCP Server** dialog opens.
 
@@ -103,7 +103,7 @@ After completing these steps you will have created an MCP server that **proxies 
 
 2. From the left navigation pane, choose **Design → Integrations and APIs**.
 
-3. Select your **`IN263 User <number>`** integration package and choose **Edit**.
+3. Select your <b>IN263 User 0XX</b> integration package and choose **Edit**.
 
 4. On the package details page, choose **Artifacts**, and under **Add**, select **MCP Server**. The **Create MCP Server** dialog opens.
 
@@ -118,11 +118,11 @@ After completing these steps you will have created an MCP server that **proxies 
 
    | Field | Value |
    | --- | --- |
-   | **Name** | `OpenSwissData_MCP_99`, where `99` is your participant number. Alphanumeric and `_` only. |
+   | **Name** | <b>OpenSwissData_MCP_0XX</b> *(replace XX with your assigned participant number)*. Alphanumeric and `_` only. |
    | **ID** | Identifier shown on the home screen. |
    | **Destination** | `openswissdata` (selected in the previous step; used to connect to the remote server and, by default, for runtime execution). |
    | **Relative Path** | *Optional.* Leave empty — the destination URL already points at the JSON-RPC endpoint. |
-   | **MCP Path** | `openswissdata_mcp_99`, where `99` is your participant number. Must not be empty or just `/`. |
+   | **MCP Path** | <b>openswissdata_mcp_0XX</b> *(replace XX with your assigned participant number)*. Must not be empty or just `/`. |
    | **Version** | Optional. |
    | **Runtime Profile** | The **Integration Cell** runtime node. |
    | **Virtual Host** | Review the virtual host URL. |
