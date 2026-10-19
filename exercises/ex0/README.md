@@ -1,8 +1,10 @@
-# Getting Started - Pre-configured Setup
+# Getting Started — Pre-configured Setup
+
+## Overview
 
 This section describes the **pre-configured setup** that supports the hands-on exercises. In the TechEd hands-on room, the instructor has already prepared all of this for you — it is **not** part of the exercises you perform. It is documented here for your information, so that you understand what the environment relies on and can **reproduce the same setup in your own projects** after the session.
 
-The one thing you do set up yourself is your personal integration package — see [Your integration package](#your-integration-package) at the end.
+The two things you do yourself are **logging in** ([Accessing the system](#accessing-the-system)) and **creating your package** ([Your integration package](#your-integration-package)).
 
 > **Reference:** [Artificial Intelligence (SAP Integration Suite)](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/artificial-intelligence)
 
@@ -19,6 +21,9 @@ To reach the SAP Integration Suite tenant used in this session:
    | **User** | <b>User0XX</b> — replace `XX` with your assigned participant number, zero-padded to three digits (for example, `User007`) |
    | **Password** | Provided by the instructor |
 
+   <br>![SAP Integration Suite login](/exercises/ex0/images/ex0_01_login.png)
+
+   > [!IMPORTANT]
    > Use the same participant number throughout the session — for your login user, for your **`IN263 User 0XX`** package, and in the artifact names (for example, `OpenSwissData_MCP_0XX`). Your participant number is assigned to you by the instructor.
 
 ## Tenant, capabilities, and runtime (already provisioned)
@@ -60,7 +65,7 @@ A tenant administrator (`PI_Administrator`) has already activated the AI feature
 
 ## The OpenSwissData destination (for Exercise 1.2)
 
-[Exercise 1.2](../ex1/README.md#exercise-12-create-an-mcp-server-using-a-remote-mcp-server-as-the-source-federation) federates a public remote MCP server. The destination it needs — **`openswissdata`** — has already been created for you in the **SAP BTP Cockpit** of the subaccount that hosts SAP Integration Suite (**Connectivity → Destinations → Create Destination → From Scratch**). To reproduce it in your own subaccount, create a destination with these values:
+[Exercise 1.2](../ex1/README.md#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source-federation) federates a public remote MCP server. The destination it needs — **`openswissdata`** — has already been created for you in the **SAP BTP Cockpit** of the subaccount that hosts SAP Integration Suite (**Connectivity → Destinations → Create Destination → From Scratch**). To reproduce it in your own subaccount, create a destination with these values:
 
 | Field | Value |
 | --- | --- |
@@ -85,10 +90,13 @@ This is the one setup step **you** perform — the rest of the exercises build a
 
 1. In SAP Integration Suite, go to **Design → Integrations and APIs**, choose **Create**, and name the package <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)*. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package).
 
+   <br>![Create your integration package](/exercises/ex0/images/ex0_02_create_package.png)
+
+> [!TIP]
 > **Reference package:** The instructor maintains a reference package named **`IN263 User XX`** that contains completed versions of the artifacts. Use it to compare against your own work. Throughout Exercises 1–3, wherever a step says "your `IN263 User 0XX` package", use the package you create here.
 
 ## Summary
 
-You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also created your personal **`IN263 User 0XX`** package to work in.
+You now know the pre-configured setup behind this session — the tenant edition, the **Cloud Integration** / **API Management** capabilities, the **Integration Cell** runtime, the role collections, the activated AI features (**Memory Profiling** and **Script Optimization**), and the **`openswissdata`** destination used by the federation exercise — and how to reproduce it all in your own projects. You have also logged in and created your personal **`IN263 User 0XX`** package to work in.
 
-Continue to - [Exercise 1 - Create and Govern MCP Servers](../ex1/README.md)
+Continue to - [Exercise 1 — Create and Govern MCP Servers](../ex1/README.md)
