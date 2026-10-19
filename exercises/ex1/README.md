@@ -250,9 +250,11 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
 
    <br>![Configure the MCP Inspector connection with a Basic Authorization header](/exercises/ex1/images/ex1_16_inspector_connect.png)
 
-6. Choose **Connect**. Once connected, use **List Tools** / **List Resources** to see what the server exposes.
+6. Choose **Connect**. Once connected, the server shows **Connected** and the protocol handshake (initialize, tools/list) appears in the message log. Use **List Tools** / **List Resources** to see what the server exposes.
 
-7. Select a tool and **invoke** it with sample arguments — for example, the OpenSwissData `tariff_lookup` tool (from 1.2) with `hs8 = 8471.3000` — and confirm the Inspector shows the response returned through the Integration Cell endpoint.
+   <br>![MCP Inspector connected to the MCP server](/exercises/ex1/images/ex1_16b_inspector_connected.png)
+
+7. Select a tool and **invoke** it with sample arguments — for example, the OpenSwissData `company_check` tool with `uid = CHE-109.815.753` — and confirm the Inspector shows the response returned through the Integration Cell endpoint.
 
    <br>![Invoke a tool and view the response](/exercises/ex1/images/ex1_17_inspector_invoke.png)
 
