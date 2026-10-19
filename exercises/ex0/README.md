@@ -17,7 +17,7 @@ To reach the SAP Integration Suite tenant used in this session:
    | Field | Value |
    | --- | --- |
    | **User** | <b>User0XX</b> — replace `XX` with your assigned participant number, zero-padded to three digits (for example, `User007`) |
-   | **Password** | `Welcome1` |
+   | **Password** | Provided by the instructor |
 
    > Use the same participant number throughout the session — for your login user, for your **`IN263 User 0XX`** package, and in the artifact names (for example, `OpenSwissData_MCP_0XX`). Your participant number is assigned to you by the instructor.
 
