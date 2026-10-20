@@ -32,7 +32,7 @@ In this sub-exercise you will generate an AI Review Report for your Groovy scrip
    <br>![Open the Groovy script editor in edit mode](/exercises/ex3/images/ex3_01_script_editor.png)
 
    > [!TIP]
-   > If you arrived here from a memory-profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.2](../ex2/README.md#exercise-22--review-the-memory-profiling-insights-and-apply-fixes)). The script editor opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
+   > If you arrived here from a memory-profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.3](../ex2/README.md#exercise-23--review-the-memory-profiling-insights-and-apply-fixes)). The script editor opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
 
 2. Choose **Optimize** from the upper-right menu of the script editor.
 
