@@ -7,7 +7,7 @@ In this exercise, you will use the **Script Optimization** feature to improve a 
 Groovy scripts are where integration flows most often leak memory or burn CPU — a map rebuilt inside a loop, the whole payload held as a `String`, an inefficient parse. **Script Optimization** sends your script to Generative AI, which returns a structured **AI Review Report**: specific recommended changes with code snippets, plus a complete improved script you can drop in. It pairs naturally with Exercise 2 — a memory-profiling hotspot on a Groovy step links straight into this editor.
 
 > [!NOTE]
-> This exercise optimizes the Groovy script inside the **`SalesOrder_MemoryProfiling_0XX`** flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)). If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
+> This exercise optimizes the Groovy script inside the **`SalesOrder_MemoryProfiling_0XX`** flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)) *(replace `XX` with your assigned participant number; the instructor's reference package uses **`SalesOrder_MemoryProfiling_XX`**)*. If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
 
 > **Reference:** [Optimize Groovy Scripts with AI](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/optimize-groovy-scripts-with-ai)
 
@@ -27,14 +27,14 @@ Groovy scripts are where integration flows most often leak memory or burn CPU �
 
 In this sub-exercise you will generate an AI Review Report for your Groovy script.
 
-1. In SAP Integration Suite, open the **`SalesOrder_MemoryProfiling_0XX`** integration flow, and open the **script editor in edit mode** (double-click the Groovy script step, then edit the script).
+1. In SAP Integration Suite, open the **`SalesOrder_MemoryProfiling_0XX`** integration flow and choose **Edit** to enter edit mode. Double-click the **Groovy Script** step to open its properties, open the **Processing** tab, and choose the script filename shown in the **Script File** field (`/script/MemoryHotspot.groovy`) to open the **script editor**.
 
    <br>![Open the Groovy script editor in edit mode](/exercises/ex3/images/ex3_01_script_editor.png)
 
    > [!TIP]
-   > If you arrived here from a memory-profiling finding, you can instead choose **Optimize in Editor** on the **Memory Profiling Insights** panel (see [Exercise 2.3](../ex2/README.md#exercise-23--review-the-memory-profiling-insights-and-apply-fixes)). The script editor opens with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
+   > You can also reach this script editor from Exercise 2: on the **Memory Profiling Insights** panel, choose **Optimize in Editor** (see [Exercise 2.3](../ex2/README.md#exercise-23--review-the-memory-profiling-insights-and-apply-fixes)). That path opens the editor with a banner noting that *"The Optimization recommendations also include memory profiling insights from Simulation."*
 
-2. Choose **Optimize** from the upper-right menu of the script editor.
+2. Choose **Optimize** from the upper-right toolbar of the script editor.
 
    <br>![Choose Optimize in the script editor](/exercises/ex3/images/ex3_02_optimize_button.png)
 
@@ -62,11 +62,13 @@ In this sub-exercise you will apply the AI's suggestions to your script.
    - **Selective:** copy individual snippets from the **Recommended Changes** section and paste them into the correct lines in the script editor; or
    - **Full replacement:** copy the full script from the **Improved Script** section and paste it into the editor to replace the original.
 
-3. Once you are satisfied with your changes, choose **Apply**.
+3. Once you are satisfied with your changes, choose **Apply**. This writes the optimized script back into the script editor.
 
    <br>![Apply the optimized script](/exercises/ex3/images/ex3_04_apply.png)
 
-4. (Recommended) Validate the optimized script by re-running the integration flow **Simulation** (see [Exercise 2](../ex2/README.md)) — ideally with **Memory Profiling** enabled — to confirm the resource-usage improvement before deployment.
+4. Choose **Save** to save the integration flow. Applying the script only updates the editor — the change is not persisted until you save the flow.
+
+5. (Recommended) Validate the optimized script by re-running the integration flow **Simulation** (see [Exercise 2](../ex2/README.md)) — ideally with **Memory Profiling** enabled — to confirm the resource-usage improvement before deployment.
 
 ## Troubleshooting
 

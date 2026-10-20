@@ -32,13 +32,17 @@ In this sub-exercise you will create the integration flow you will profile: **St
 
    <br>![Add an Integration Flow artifact](/exercises/ex2/images/ex2_01_add_artifact.png)
 
+   <br>![Choose Add Integrations manually](/exercises/ex2/images/ex2_01b_add_integrations_manually.png)
+
 2. Keep **Create** selected and enter the name <b>SalesOrder_MemoryProfiling_0XX</b> *(replace XX with your participant number)*; the **ID** fills in automatically. Leave **Runtime Profile** as **Cloud Integration** and choose **Add and Open in Editor**.
 
    <br>![Name the integration flow](/exercises/ex2/images/ex2_02_create_iflow.png)
 
-3. Choose **Edit** to open the flow in **edit mode**. Using the connection between **Start** and **End**, add two steps so the flow reads **Start → Content Modifier → Groovy Script → End**:
+3. Choose **Edit** to open the flow in **edit mode**. Using the connection between **Start** and **End**, add two steps using the **+** button so the flow reads **Start → Content Modifier → Groovy Script → End**:
    - a **Content Modifier** (**Transformation → Content Modifier**), and
    - a **Groovy Script** (**Message Transformers → Script → Groovy Script**).
+
+   <br>![Add a flow step from the palette](/exercises/ex2/images/ex2_03a_add_flow_step.png)
 
    <br>![Flow with Content Modifier and Groovy Script](/exercises/ex2/images/ex2_03_flow_built.png)
 
@@ -48,21 +52,27 @@ In this sub-exercise you will create the integration flow you will profile: **St
 
 5. Double-click the **Groovy Script** step, open the **Processing** tab, and choose **Select → Upload from File System** to assign the script [`MemoryHotspot.groovy`](assets/MemoryHotspot.groovy). The **Script File** field then shows `/script/MemoryHotspot.groovy`.
 
+   <br>![Open the processing screen](/exercises/ex2/images/ex2_05b_open_processing.png)
+
+   <br>![Select Resource dialog with Upload from File System](/exercises/ex2/images/ex2_05a_upload_from_file_system.png)
+
    <br>![Assign the Groovy script file](/exercises/ex2/images/ex2_05_groovy_script_setup.png)
 
    > [!NOTE]
    > `MemoryHotspot.groovy` parses the SalesOrder XML with the standard Java DOM parser (`javax.xml.parsers`) and flattens every order line into a CSV report in a **deliberately memory-inefficient** way — building the report with the String-concatenation anti-pattern inside a loop and keeping parallel copies in memory. This gives the profiler a clear, high-severity hotspot to find. It uses only classes available on the Integration Cell Groovy runtime (it does **not** use `XmlSlurper`).
 
-6. Open the script (choose the **`/script/MemoryHotspot.groovy`** link) to review it in the editor, then **Save** the integration flow.
+6. Open the script (choose the script filename shown in the **Script File** field) to review it in the editor.
 
    <br>![Review the Groovy script in the editor](/exercises/ex2/images/ex2_06_groovy_script_content.png)
+
+7.  **Save** the integration flow.
 
 ## Exercise 2.2 — Configure and Run a Simulation with Memory Profiling
 
 In this sub-exercise you will run a simulation of a subset of your integration flow with memory profiling enabled.
 
 > [!NOTE]
-> The simulation controls appear as icons in the integration flow editor's **top toolbar** (not in a separate palette). Before any input is added they read **Run Simulation** / **Clear Simulation**; once you enable memory insights on the input (step 4) the labels change to **Run Simulation and Profiling** / **Clear Simulation and Profiling**.
+> The simulation controls appear as icons in the integration flow editor's **top toolbar** (not in a separate palette). Before any input is added they read **Run Simulation** / **Clear Simulation**; once you enable memory insights on the input (step 3) the labels change to **Run Simulation and Profiling** / **Clear Simulation and Profiling**.
 
 1. With the flow open in **edit mode**, set the **start point** where the simulation begins. Hover over the flow step *before* which the simulation should start (here, the **Content Modifier**) and choose **Simulation Start Point** from the step's action palette — a start marker appears on the incoming connection.
 
@@ -80,15 +90,15 @@ In this sub-exercise you will run a simulation of a subset of your integration f
    > [!NOTE]
    > The run button stays greyed out until **both** a start point and an end point are defined. Simulation also fails if there are check errors in a resource (such as a mapping), or if a step throws at runtime (for example, a Groovy script receiving an empty body).
 
-3. Click the **Simulation Start Point** marker to open the **Add Simulation Input** dialog, and provide the input the simulated subset will run against:
+3. Click the **Simulation Start Point** marker to open the **Add Simulation Input** dialog, and provide the input the simulated subset will run against.
+
+   First, at the **top** of the dialog in the **AI Configuration** section, select **Enable Memory Insights** to obtain memory profiling insights after a successful run. Then fill in the fields below:
 
    | Field | Value |
    |---|---|
    | **Header** | *Optional.* Any headers the simulated subset needs. |
    | **Properties** | *Optional.* Any exchange properties the simulated subset needs. |
    | **Body** | The message payload. Choose **Upload from File System** to load the sample payload [`salesOrder_complex.xml`](assets/salesOrder_complex.xml) (the **File** field then shows the file name and the **Content** area shows the XML), or type/paste the payload directly into **Content**. |
-
-   In the **AI Configuration** section at the top of the dialog, select **Enable Memory Insights** to obtain memory profiling insights after a successful run.
 
    <br>![Add Simulation Input with Enable Memory Insights](/exercises/ex2/images/ex2_09_simulation_input.png)
 
@@ -117,11 +127,11 @@ In this sub-exercise you will review the AI-driven memory recommendations and ap
 
 3. Apply a suggested fix to the relevant flow step — for example, adjust a Content Modifier, a streaming/splitter configuration, or data store usage as recommended.
 
-4. If a hotspot is in a **Groovy script** step, choose **Optimize in Editor** (top right of the Memory Profiling Insights panel). This opens the Groovy script editor with a banner that reads *"The Optimization recommendations also include memory profiling insights from Simulation."* There, choose **Optimize** to generate the AI Review Report.
+4. If a hotspot is in a **Groovy script** step, choose **Optimize in Editor** (top right of the Memory Profiling Insights panel). This opens the Groovy script editor with a banner that reads *"The Optimization recommendations also include memory profiling insights from Simulation."* From here you would run **Optimize** to generate the AI Review Report — but **don't trigger it yet**: the script-optimization flow is covered step by step in the next exercise.
 
    <br>![Optimize in Editor opens the Groovy editor with the memory-insights banner](/exercises/ex2/images/ex2_12_optimize_in_editor.png)
 
-   > See [Exercise 3 — Optimize Groovy Scripts with AI](../ex3/README.md) for the detailed script-optimization flow.
+   > Continue with [Exercise 3 — Optimize Groovy Scripts with AI](../ex3/README.md), which explains the **Optimize** action and the AI Review Report in detail.
 
 5. **Re-run** the simulation (**Run Simulation and Profiling**) to confirm the improvement and surface the next most significant memory issue. Repeat until you are satisfied.
 
