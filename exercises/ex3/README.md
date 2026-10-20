@@ -7,7 +7,7 @@ In this exercise, you will use the **Script Optimization** feature to improve a 
 Groovy scripts are where integration flows most often leak memory or burn CPU — a map rebuilt inside a loop, the whole payload held as a `String`, an inefficient parse. **Script Optimization** sends your script to Generative AI, which returns a structured **AI Review Report**: specific recommended changes with code snippets, plus a complete improved script you can drop in. It pairs naturally with Exercise 2 — a memory-profiling hotspot on a Groovy step links straight into this editor.
 
 > [!NOTE]
-> This exercise optimizes a Groovy script inside a flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)). If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
+> This exercise optimizes the Groovy script inside the **`SalesOrder_MemoryProfiling_0XX`** flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)). If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
 
 > **Reference:** [Optimize Groovy Scripts with AI](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/optimize-groovy-scripts-with-ai)
 
@@ -15,7 +15,7 @@ Groovy scripts are where integration flows most often leak memory or burn CPU �
 
 - The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence**) — pre-configured for the session, see [Getting Started](../ex0/README.md).
 - Your user has the `WebToolingWorkspace.Write` role collection (pre-assigned — see [Getting Started](../ex0/README.md)).
-- An integration flow that contains a **Groovy** script step (not JavaScript), in your **`IN263 User 0XX`** package.
+- The integration flow **`SalesOrder_MemoryProfiling_0XX`**, which contains a **Groovy** script step (not JavaScript), in your **`IN263 User 0XX`** package.
 
 > [!IMPORTANT]
 > - The Groovy script must be **≤ 50 KB**.
@@ -27,7 +27,7 @@ Groovy scripts are where integration flows most often leak memory or burn CPU �
 
 In this sub-exercise you will generate an AI Review Report for your Groovy script.
 
-1. In SAP Integration Suite, open the integration flow that contains the Groovy script, and open the **script editor in edit mode** (double-click the Groovy script step, then edit the script).
+1. In SAP Integration Suite, open the **`SalesOrder_MemoryProfiling_0XX`** integration flow, and open the **script editor in edit mode** (double-click the Groovy script step, then edit the script).
 
    <br>![Open the Groovy script editor in edit mode](/exercises/ex3/images/ex3_01_script_editor.png)
 
