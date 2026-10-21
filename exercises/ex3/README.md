@@ -9,19 +9,10 @@ Groovy scripts are where integration flows most often leak memory or burn CPU �
 > [!NOTE]
 > This exercise optimizes the Groovy script inside the **`SalesOrder_MemoryProfiling_0XX`** flow in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)) *(replace `XX` with your assigned participant number; the instructor's reference package uses **`SalesOrder_MemoryProfiling_XX`**)*. If you arrived here from a memory-profiling finding in [Exercise 2](../ex2/README.md), you are already in the right editor — skip to [Exercise 3.1](#exercise-31--run-the-ai-review-on-a-groovy-script) step 2.
 
-> **Reference:** [Optimize Groovy Scripts with AI](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/optimize-groovy-scripts-with-ai)
-
-## Prerequisites
-
-- The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence**) — pre-configured for the session, see [Getting Started](../ex0/README.md).
-- Your user has the `WebToolingWorkspace.Write` role collection (pre-assigned — see [Getting Started](../ex0/README.md)).
-- The integration flow **`SalesOrder_MemoryProfiling_0XX`**, which contains a **Groovy** script step (not JavaScript), in your **`IN263 User 0XX`** package.
-
 > [!IMPORTANT]
 > - The Groovy script must be **≤ 50 KB**.
 > - **Do not** expose sensitive information in scripts you submit to **Optimize** (SAP Note [3542713](https://me.sap.com/notes/3542713)).
 > - **Optimize** can be used repeatedly, but there is a per-minute rate limit and a monthly fair-usage token quota.
-> - AI features require the Premium or Enhanced Edition (free promotion until the January 2027 release — SAP Notes [2903776](https://me.sap.com/notes/2903776) and [3463620](https://me.sap.com/notes/3463620)).
 
 ## Exercise 3.1 — Run the AI Review on a Groovy Script
 
@@ -89,6 +80,16 @@ Common error messages and what to do:
 | *The provided Groovy script content is too large.* | Shorten the script to ≤ 50 KB. |
 | *...you have reached your fair usage token quota.* | Wait until the monthly quota regenerates. |
 | *The AI request cannot be processed at the moment...* | Try again later; if it persists, open an incident on `LOD-HCI-PI-RC`. |
+
+## Reference and Prerequisites
+
+### Prerequisites
+
+- The **Script Optimization** feature is enabled in your tenant (**Settings → Artificial Intelligence**) — pre-configured for the session, see [Getting Started](../ex0/README.md).
+- Your user has the `WebToolingWorkspace.Write` role collection (pre-assigned — see [Getting Started](../ex0/README.md)).
+- The integration flow **`SalesOrder_MemoryProfiling_0XX`**, which contains a **Groovy** script step (not JavaScript), in your **`IN263 User 0XX`** package.
+
+> **Reference:** [Optimize Groovy Scripts with AI](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/optimize-groovy-scripts-with-ai)
 
 ## Summary
 

@@ -9,20 +9,8 @@ Memory problems in an integration flow usually surface only at runtime, under lo
 > [!NOTE]
 > This exercise builds and profiles the integration flow **`SalesOrder_MemoryProfiling_0XX`** in your **`IN263 User 0XX`** package (see [Getting Started](../ex0/README.md)) *(replace `XX` with your assigned participant number)*. The flow reads a larger SalesOrder message and transforms it with a Content Modifier and a Groovy script, so there is memory behavior worth profiling. The instructor's reference package uses **`SalesOrder_MemoryProfiling_XX`**.
 
-> **References**
-> - [AI-based Memory Profiling](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/ai-based-memory-profiling)
-> - [Configure Simulation](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-simulation)
-> - [Simulation of an Integration Flow](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/simulation-of-integration-flow)
-
-## Prerequisites
-
-- The **Memory Profiling** feature is enabled in your tenant (**Settings → Artificial Intelligence**, **Activation Status** toggle **ON**). This is pre-configured for the session — see [Getting Started](../ex0/README.md).
-- Your **`IN263 User 0XX`** package (from [Getting Started](../ex0/README.md)), in which you will build the flow.
-- The sample payload [`salesOrder_complex.xml`](assets/salesOrder_complex.xml) and the Groovy script [`MemoryHotspot.groovy`](assets/MemoryHotspot.groovy) from this exercise's `assets/` folder.
-- To act on **Groovy script** recommendations, the **Script Optimization** feature must also be enabled (same **Settings → Artificial Intelligence** page — see [Exercise 3](../ex3/README.md)).
-
 > [!IMPORTANT]
-> If your tenant is on the Cloud Foundry environment, the simulation **input payload must be < 100 KB** and the **overall output payload < 1 MB**. AI features require the Premium or Enhanced Edition (free promotion until the January 2027 release — SAP Note [2903776](https://me.sap.com/notes/2903776)).
+> If your tenant is on the Cloud Foundry environment, the simulation **input payload must be < 100 KB** and the **overall output payload < 1 MB**.
 
 ## Exercise 2.1 — Build the Integration Flow
 
@@ -46,7 +34,13 @@ In this sub-exercise you will create the integration flow you will profile: **St
 
    <br>![Flow with Content Modifier and Groovy Script](/exercises/ex2/images/ex2_03_flow_built.png)
 
-4. Double-click the **Content Modifier**, open the **Message Header** tab, and choose **Add** to set a header (for example, **Name** `SourceSystem`, **Source Type** `Constant`, **Source Value** `SalesOrderXML`). Leave the **Message Body** tab empty so the incoming SalesOrder payload passes through unchanged to the Groovy script.
+4. Double-click the **Content Modifier**, open the **Message Header** tab, and choose **Add** to set a header. Leave the **Message Body** tab empty so the incoming SalesOrder payload passes through unchanged to the Groovy script.
+
+   | Field | Value |
+   |---|---|
+   | **Name** | `SourceSystem` |
+   | **Source Type** | `Constant` |
+   | **Source Value** | `SalesOrderXML` |
 
    <br>![Configure the Content Modifier](/exercises/ex2/images/ex2_04_content_modifier_config.png)
 
@@ -137,6 +131,20 @@ In this sub-exercise you will review the AI-driven memory recommendations and ap
 
    > [!NOTE]
    > Changing the integration flow mode (Read ↔ Edit) or choosing **Clear Simulation and Profiling** discards the simulation configuration and data (including the uploaded input).
+
+## Reference and Prerequisites
+
+### Prerequisites
+
+- The **Memory Profiling** feature is enabled in your tenant (**Settings → Artificial Intelligence**, **Activation Status** toggle **ON**). This is pre-configured for the session — see [Getting Started](../ex0/README.md).
+- Your **`IN263 User 0XX`** package (from [Getting Started](../ex0/README.md)), in which you will build the flow.
+- The sample payload [`salesOrder_complex.xml`](assets/salesOrder_complex.xml) and the Groovy script [`MemoryHotspot.groovy`](assets/MemoryHotspot.groovy) from this exercise's `assets/` folder.
+- To act on **Groovy script** recommendations, the **Script Optimization** feature must also be enabled (same **Settings → Artificial Intelligence** page — see [Exercise 3](../ex3/README.md)).
+
+> **References**
+> - [AI-based Memory Profiling](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/ai-based-memory-profiling)
+> - [Configure Simulation](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/configure-simulation)
+> - [Simulation of an Integration Flow](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/simulation-of-integration-flow)
 
 ## Summary
 

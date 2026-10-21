@@ -9,17 +9,6 @@ An MCP server is an artifact you create in SAP Integration Suite to expose your 
 > [!NOTE]
 > Work in your own **`IN263 User 0XX`** package throughout (see [Getting Started](../ex0/README.md)). You can reuse the same package for both MCP servers in this exercise.
 
-> **References**
-> - [MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/model-context-protocol-mcp)
-> - [Creating an MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/creating-mcp-server)
-> - [How Model Context Protocol (MCP) Server Enables AI Integration](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/how-mcp-server-enables-ai-integration)
-
-## Prerequisites
-
-- **API Management** capability and the **Integration Cell** runtime activated (pre-configured for the session — see [Getting Started](../ex0/README.md)).
-- The `PI_Integration_Developer` role collection assigned to your user (pre-assigned — see [Getting Started](../ex0/README.md)).
-- Your own package named <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)*. See [Creating an Integration Package](https://help.sap.com/docs/integration-suite/sap-integration-suite/creating-integration-package).
-
 > [!IMPORTANT]
 > General rules that apply to every MCP server you create:
 > - Any OpenAPI specification used as a source must be version **3.0.0–3.0.3** (Swagger 2.0 and earlier are not supported).
@@ -33,14 +22,14 @@ An MCP server is an artifact you create in SAP Integration Suite to expose your 
 
 In this sub-exercise you will expose an external REST service — the public **Autobahn** road/traffic API — as an MCP server by providing its OpenAPI specification.
 
-> **Reference:** [Create an MCP Server from an HTTP Endpoint](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-http-endpoint)
-
 > [!NOTE]
 > To connect through a destination (recommended), an **HTTP destination** with the label `IntegrationCell.Include = true` must exist in the SAP BTP Cockpit (**Connectivity → Destinations**). Only destinations with **Proxy Type** `Internet` or `OnPremise` are supported. See [Create HTTP Destinations](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/create-http-destinations).
 
-1. Log on to SAP Integration Suite and choose **Design → Integrations and APIs**.
+1. In SAP Integration Suite, choose **Design → Integrations and APIs**, choose **Create**, and name the package <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)*. This is the package you will work in throughout Exercise 1.
 
-2. Select your <b>IN263 User 0XX</b> integration package and choose **Edit**.
+   <br>![Create your integration package](/exercises/ex0/images/ex0_02_create_package.png)
+
+2. Open your <b>IN263 User 0XX</b> package and choose **Edit**.
 
    <br>![Open your package and choose Edit](/exercises/ex1/images/ex1_01_edit_package.png)
 
@@ -81,19 +70,15 @@ In this sub-exercise you will expose an external REST service — the public **A
 
    <br>![Create Tools — select the four Autobahn tools](/exercises/ex1/images/ex1_05_create_tools_http.png)
 
-7. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) simple — a username and password instead of an OAuth token flow.
+   The MCP servers keep their **default Authentication and Authorization policies** — no policy change is needed.
 
-   <br>![Policies tab — set Authentication to Basic only](/exercises/ex1/images/ex1_06_policies_basic_auth.png)
-
-8. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**.
+7. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**.
 
 ---
 
 ## Exercise 1.2 — Create an MCP Server Using a Remote MCP Server as the Source
 
 In this sub-exercise you will create an MCP server that **proxies a remote (third-party) MCP server** — the public **OpenSwissData** MCP server — so that SAP Integration Suite acts as a managed governance layer in front of it, applying security and traffic policies while leaving the remote server unchanged.
-
-> **Reference:** [Create an MCP Server Using Remote MCP Server as the Source](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-using-remote-mcp-server-as-source)
 
 <details>
 <summary><strong>📖 About the remote server: OpenSwissData</strong></summary>
@@ -153,19 +138,13 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
 
    <br>![Select the OpenSwissData tools](/exercises/ex1/images/ex1_10_create_tools_remote.png)
 
-8. In the editor, open the **Policies** tab and edit the **Authentication** policy so the MCP server accepts **Basic authentication only** (remove the OAuth/OData-based authentication). This keeps consumption in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) simple.
-
-   <br>![Policies tab — set Authentication to Basic only](/exercises/ex1/images/ex1_11_policies_basic_auth_remote.png)
-
-9. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**. You will inspect and invoke its proxied tools in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) — for example, `tariff_lookup` with `hs8 = 8471.3000`.
+8. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**. You will inspect and invoke its proxied tools in [Exercise 1.4](#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional) — for example, `tariff_lookup` with `hs8 = 8471.3000`.
 
 ---
 
 ### Deploy an MCP Server
 
 Both MCP servers you create in 1.1 and 1.2 are deployed the same way: from the artifact editor, choose **Save** (top right) and then **Deploy** (top right).
-
-> **Reference:** [Deploy an MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/deploy-mcp-server)
 
 1. With the MCP server open in the editor, choose **Save** (top right), then **Deploy** (top right).
 
@@ -187,24 +166,28 @@ Both MCP servers you create in 1.1 and 1.2 are deployed the same way: from the a
 
 ---
 
-## Exercise 1.3 — Inspect and Consume the MCP Servers with MCP Inspector (Optional)
+## Exercise 1.3 — Obtain Credentials via Developer Hub
+
+In this sub-exercise you will publish your MCP servers as a **Product**, subscribe to it with an **Application** in the **Developer Hub**, and obtain the OAuth2 credentials (**Client ID**, **Client Secret**, and **Token URL**) used to call the governed MCP endpoint.
+
+> **Note:** This sub-exercise is being finalized with live screenshots and step-by-step field tables. _(Content pending — producer steps to create the AI product and add the MCP servers, then consumer steps to register, subscribe, create an application, and copy the credentials.)_
+
+---
+
+## Exercise 1.4 — Inspect and Consume the MCP Servers with MCP Inspector (Optional)
 
 In this optional sub-exercise you will connect the **MCP Inspector** — the official developer tool for the Model Context Protocol — to one of your deployed MCP servers, list its tools, and invoke one to confirm the end-to-end flow through the governed Integration Cell endpoint.
 
-> **References**
-> - [Invoke the MCP Server Endpoint URL](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-endpoint-url)
-> - [MCP Inspector (modelcontextprotocol/inspector)](https://github.com/modelcontextprotocol/inspector)
-
 > [!NOTE]
-> Prerequisites: an MCP server **deployed** with runtime status **STARTED** (from 1.1–1.2) whose **Authentication** policy is set to **Basic** (configured in 1.1 / 1.2), and **Node.js** installed locally (the Inspector runs via `npx` — no separate install needed).
+> Prerequisites: an MCP server **deployed** with runtime status **STARTED** (from 1.1–1.2).
 
-### Step 1: Get the endpoint URL and your Basic credentials
+### Step 1: Get the endpoint URL and your credentials
 
-1. Open your deployed MCP server and copy its **endpoint URL** — shown on the MCP server's **Overview** tab as the **MCP URL** (also available in **Monitor → Integrations and APIs → Manage Integration Content → Endpoints**, see [Exercise 1.4](#exercise-14--monitor-the-mcp-servers-usage)).
+1. Open your deployed MCP server and copy its **endpoint URL** — shown on the MCP server's **Overview** tab as the **MCP URL** (also available in **Monitor → Integrations and APIs → Manage Integration Content → Endpoints**, see [Exercise 1.5](#exercise-15--monitor-the-mcp-servers-usage)).
 
    <br>![Copy the MCP server endpoint URL](/exercises/ex1/images/ex1_14_mcp_url.png)
 
-2. Because the server's **Authentication** policy is set to **Basic**, you authenticate with your workshop **username and password** — the same `User0XX` / password you logged in with (see [Getting Started](../ex0/README.md#accessing-the-system)). No Developer Hub subscription or OAuth token is needed.
+2. Use the **Client ID / Client Secret / Token URL** obtained in [Exercise 1.3](#exercise-13--obtain-credentials-via-developer-hub) to authenticate (see that sub-exercise). _(Bearer-token details pending.)_
 
 ### Step 2: Launch MCP Inspector
 
@@ -258,18 +241,11 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
 
    <br>![Invoke a tool and view the response](/exercises/ex1/images/ex1_17_inspector_invoke.png)
 
-> [!TIP]
-> If you have access to the SAP **Early Adopter Care (EAC)** program, you can instead consume the MCP server from **Joule Work Desktop** by adding it as a connector with the same endpoint URL and credentials. See [Invoke an MCP Server from Joule Work Desktop](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-from-joule-work-desktop).
-
 ---
 
-## Exercise 1.4 — Monitor the MCP Servers' Usage
+## Exercise 1.5 — Monitor the MCP Servers' Usage
 
 In this sub-exercise you will find where to check the deployment status, runtime logs, endpoints, and usage analytics of your MCP servers. If you didn't take the previous sub-execise (Optional), you can explore other MCP server's usage data deployed in the same tenant.
-
-> **References**
-> - [Monitor APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/monitor-apis)
-> - [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers)
 
 ### Step 1: Check status, endpoints, and logs
 
@@ -283,7 +259,7 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 4. Select your MCP server. On the right, the **Integration Content Details** show:
    - Header info: **Deployed on**, **Deployed by**, **Version**, **ID**, **Package**, and actions **Restart / Undeploy / Download**.
-   - **Endpoints** — the exposed URLs; use **Copy** to copy the endpoint (the one you used in [Exercise 1.3](#exercise-13--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional)).
+   - **Endpoints** — the exposed URLs; use **Copy** to copy the endpoint (the one you used in [Exercise 1.4](#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional)).
    - **Status Details** — whether the artifact is deployed or undeployed.
    - **Log Configuration** — set the **Log Level** (None, Info, Error, Debug, Trace). Use **Trace**/**Debug** only in test environments; both expire automatically (Debug after 24 hours, Trace after ~10 minutes).
 
@@ -297,14 +273,38 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 7. Explore the KPI tiles (**Total MCP Calls**, **MCP Response Time**, **Total MCP Errors**) and the **MCP Charts** below them. Use the tabs (**Overview**, **Health**, **Usage**, **Anomalies**, **Predictions**) and the chart filters (**All MCP Servers** or **Select MCP Servers from the list**) to review usage, performance, and traffic for your deployed MCP servers. See [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers).
 
+---
+
+## Reference and Prerequisites
+
+### Prerequisites
+
+- **API Management** capability and the **Integration Cell** runtime activated (pre-configured for the session — see [Getting Started](../ex0/README.md)).
+- The `PI_Integration_Developer` role collection assigned to your user (pre-assigned — see [Getting Started](../ex0/README.md)).
+- Your own package named <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)* — created as the first step of Exercise 1.1.
+
+### References
+
+- [MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/model-context-protocol-mcp)
+- [Creating an MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/creating-mcp-server)
+- [How Model Context Protocol (MCP) Server Enables AI Integration](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/how-mcp-server-enables-ai-integration)
+- [Create an MCP Server from an HTTP Endpoint](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-from-http-endpoint)
+- [Create an MCP Server Using Remote MCP Server as the Source](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/create-mcp-server-using-remote-mcp-server-as-source)
+- [Deploy an MCP Server](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/deploy-mcp-server)
+- [Invoke the MCP Server Endpoint URL](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/invoke-mcp-server-endpoint-url)
+- [MCP Inspector (modelcontextprotocol/inspector)](https://github.com/modelcontextprotocol/inspector)
+- [Monitor APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/monitor-apis)
+- [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers)
+
 ## Summary
 
 You have now created and governed MCP servers in SAP Integration Suite. In doing so you have:
 
 - Created an MCP server from an **HTTP endpoint + OpenAPI specification** (Autobahn).
 - Created an MCP server from a **remote MCP server** (OpenSwissData), with Integration Suite as the governance layer in front of it.
-- Set each server's **Authentication** policy to **Basic**, **Saved**, and **Deployed** both to the Integration Cell runtime (**Runtime Status: STARTED**).
-- **Inspected and invoked** the tools with the MCP Inspector using Basic authentication.
+- Left each server's **default Authentication and Authorization policies** in place, **Saved**, and **Deployed** both to the Integration Cell runtime (**Runtime Status: STARTED**).
+- Published the MCP servers as a **Product** and obtained **OAuth2 credentials** (Client ID / Secret / Token URL) via the **Developer Hub**.
+- **Inspected and invoked** the tools with the MCP Inspector using a bearer token.
 - Located the **monitoring and analytics** for status, endpoints, logs, and usage.
 
 Through this you experienced how SAP Integration Suite acts as a **governed gateway** between AI agents and your enterprise integrations.
