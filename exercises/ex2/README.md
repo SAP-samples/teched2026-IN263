@@ -133,7 +133,7 @@ In this sub-exercise you will review the AI-driven memory recommendations and ap
 
    > Continue with [Exercise 3 — Optimize Groovy Scripts with AI](../ex3/README.md), which explains the **Optimize** action and the AI Review Report in detail.
 
-5. **Re-run** the simulation (**Run Simulation and Profiling**) to confirm the improvement and surface the next most significant memory issue. Repeat until you are satisfied.
+5. Optionally you can **Re-run** the simulation (**Run Simulation and Profiling**) to confirm the improvement and surface the next most significant memory issue. Repeat until you are satisfied.
 
    > [!NOTE]
    > Changing the integration flow mode (Read ↔ Edit) or choosing **Clear Simulation and Profiling** discards the simulation configuration and data (including the uploaded input).
