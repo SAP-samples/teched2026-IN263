@@ -27,7 +27,7 @@ This list is what you would need to reproduce the exercises in your own environm
 - An **SAP Integration Suite** tenant with the **Enhanced Edition** (or **Premium Edition**); the AI features used in this session require one of these editions. See SAP Notes [2903776](https://me.sap.com/notes/2903776) (service plans) and [3463620](https://me.sap.com/notes/3463620) (AI feature availability by region).
 - The **Cloud Integration** and **API Management** capabilities activated, and the **Integration Cell** runtime provisioned.
 - Access to an external HTTP/REST service you can expose (for example, the public Autobahn API) and, optionally, a remote MCP server for the remote-source exercise.
-- **Node.js** installed locally, to run the **MCP Inspector** locally when consuming your MCP servers.
+- (Optional) **Node.js**, only if you choose to run the **MCP Inspector** locally instead of using the hosted instance when consuming your MCP servers.
 
 ## Exercises
 
@@ -36,7 +36,7 @@ This list is what you would need to reproduce the exercises in your own environm
     - [Exercise 1.1 - Create an MCP Server from an HTTP Endpoint (Autobahn)](exercises/ex1#exercise-11--create-an-mcp-server-from-an-http-endpoint-autobahn)
     - [Exercise 1.2 - Create an MCP Server Using a Remote MCP Server as the Source](exercises/ex1#exercise-12--create-an-mcp-server-using-a-remote-mcp-server-as-the-source)
     - [Exercise 1.3 - Obtain Credentials via Developer Hub](exercises/ex1#exercise-13--obtain-credentials-via-developer-hub)
-    - [Exercise 1.4 - Inspect and Consume the MCP Servers with MCP Inspector (Optional)](exercises/ex1#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector-optional)
+    - [Exercise 1.4 - Inspect and Consume the MCP Servers with MCP Inspector](exercises/ex1#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector)
     - [Exercise 1.5 - Monitor the MCP Servers' Usage](exercises/ex1#exercise-15--monitor-the-mcp-servers-usage)
 - [Exercise 2 - AI-based Memory Profiling of an Existing iFlow](exercises/ex2/)
 - [Exercise 3 - Optimize Groovy Scripts with AI](exercises/ex3/)

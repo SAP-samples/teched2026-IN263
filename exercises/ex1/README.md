@@ -34,7 +34,7 @@ In this sub-exercise you will expose an external REST service — the public **A
 
 1. In SAP Integration Suite, choose **Design → Integrations and APIs**, choose **Create**, and name the package <b>IN263 User 0XX</b> *(replace XX with your assigned participant number)*. This is the package you will work in throughout Exercise 1.
 
-   <br>![Create your integration package](/exercises/ex0/images/ex0_02_create_package.png)
+   <br>![Create your integration package](/exercises/ex1/images/ex1_00_create_package.png)
 
 2. Open your <b>IN263 User 0XX</b> package and choose **Edit**.
 
@@ -109,7 +109,7 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
 
 4. Select **Remote MCP Servers** as the source type and click **Next**.
 
-   <br>![Select the Remote MCP Servers source type](/exercises/ex1/images/ex1_07_source_type_remote.png)
+   <br>![Select the Remote MCP Servers source type](/exercises/ex1/images/ex1_06_source_type_remote.png)
 
 5. Select the **`openswissdata`** destination, verify the following, and click **Next**:
 
@@ -119,7 +119,7 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
    | **URL** | `https://mcp.openswissdata.com/jsonrpc` |
    | **Authentication** | `NoAuthentication` |
 
-   <br>![Select the openswissdata destination](/exercises/ex1/images/ex1_08_select_destination.png)
+   <br>![Select the openswissdata destination](/exercises/ex1/images/ex1_07_select_destination.png)
 
 6. In the **Provide MCP Details** step, fill in the fields:
 
@@ -134,7 +134,7 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
    | **Runtime Profile** | `Integration Cell` |
    | **Virtual Host** | Review the pre-filled virtual host URL. |
 
-   <br>![Provide MCP Details for the remote MCP server](/exercises/ex1/images/ex1_09_mcp_details_remote.png)
+   <br>![Provide MCP Details for the remote MCP server](/exercises/ex1/images/ex1_08_mcp_details_remote.png)
 
 7. In the **Create Tools** step, select the checkboxes for the two tools this exercise uses, then choose **Add** to finalize and create the MCP server:
 
@@ -143,7 +143,7 @@ It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) an
    | `tariff_lookup` | Swiss customs tariff (TARES) line by tariff number |
    | `company_check` | Swiss company lookup by UID (`CHE-xxx.xxx.xxx`) |
 
-   <br>![Select the OpenSwissData tools](/exercises/ex1/images/ex1_10_create_tools_remote.png)
+   <br>![Select the OpenSwissData tools](/exercises/ex1/images/ex1_09_create_tools_remote.png)
 
 8. Choose **Save** (top right), then choose **Deploy** (top right). See [Deploy an MCP Server](#deploy-an-mcp-server) below, and wait for **Runtime Status: STARTED**. You will inspect and invoke its proxied tools in [Exercise 1.4](#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector) — for example, `tariff_lookup` with `hs8 = 8471.3000`.
 
@@ -159,11 +159,11 @@ Both MCP servers you create in 1.1 and 1.2 are deployed the same way: from the a
 
 2. In the **Confirmation** dialog, verify the selected **Runtime Profile** (the design-time one is preselected) and, optionally, a **Virtual Host**, then confirm.
 
-   <br>![Deploy confirmation dialog](/exercises/ex1/images/ex1_12_deploy.png)
+   <br>![Deploy confirmation dialog](/exercises/ex1/images/ex1_10_deploy.png)
 
 3. Wait until the artifact's header shows **`Deployed on [date], Runtime Status: STARTED`**. The MCP server is now available for consumption.
 
-   <br>![Runtime Status: STARTED](/exercises/ex1/images/ex1_13_deployed_started.png)
+   <br>![Runtime Status: STARTED](/exercises/ex1/images/ex1_11_deployed_started.png)
 
    > [!IMPORTANT]
    > Only proceed once the status shows **STARTED**. If it still shows *Not Deployed*, wait a moment and refresh the page — do not navigate away while the deployment is still submitting.
@@ -183,20 +183,20 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
 
 1. Open the **Developer Hub** from the SAP Integration Suite shell: use the navigation grid (top-right) and select **Developer Hub** — the "Centralized catalog for APIs, Events, and MCP Servers."
 
-   <br>![Developer Hub home](/exercises/ex1/images/ex1_20_devhub_navigate.png)
+   <br>![Open Developer Hub from the navigation grid](/exercises/ex1/images/ex1_12_devhub_navigate.png)
 
 
 2. In the Developer Hub top navigation, choose **Admin Center → Content**.
 
-   <br>![Developer Hub home](/exercises/ex1/images/ex1_20_devhub_home.png)
+   <br>![Developer Hub home — the APIs, Events, and MCP Servers catalog](/exercises/ex1/images/ex1_13_devhub_home.png)
 
    2.1 This opens the **Manage Content** page with the **Business Systems** tab active by default.
 
-   <br>![Admin Center → Content — Manage Content page](/exercises/ex1/images/ex1_21_devhub_manage_content.png)
+   <br>![Admin Center → Content — Manage Content page](/exercises/ex1/images/ex1_14_devhub_manage_content.png)
 
 3. Select the business system for your tenant — **workshop03a** (Type: Integration Suite). Then choose the **AI Artifacts** tab — it lists the MCP servers deployed on that system (Type: **MCP Server**, Authentication Provider: **Tenant XSUAA**). Use **Search by Name** to find yours. Select the checkboxes for both of your MCP servers (<b>Autobahn_MCP_0XX</b> and <b>OpenSwissData_MCP_0XX</b>) *(replace XX with your assigned participant number)*; verify it reads **2 Selected AI artifacts**, then choose **Create Product**.
 
-   <br>![Select both MCP servers and choose Create Product](/exercises/ex1/images/ex1_22_devhub_select_mcp_servers.png)
+   <br>![Select both MCP servers and choose Create Product](/exercises/ex1/images/ex1_15_devhub_select_mcp_servers.png)
 
 4. In the **Create Product** dialog, fill in the details, confirm the **Selected AI Artifacts (2)** shows both MCP servers, then choose **Publish**:
 
@@ -207,11 +207,11 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
    | **Short Text** | A short description, e.g. `Autobahn and OpenSwissData MCP servers bundled as a governed product for IN263.` |
    | **Description** | *Optional.* |
 
-   <br>![Create Product dialog with both MCP servers selected](/exercises/ex1/images/ex1_23_devhub_create_product.png)
+   <br>![Create Product dialog with both MCP servers selected](/exercises/ex1/images/ex1_16_devhub_create_product.png)
 
 5. Publishing runs in the background. Monitor it in **Admin Center → Scheduled Requests** — your product appears there; wait until **Status** shows **Success**.
 
-   <br>![Admin Center → Scheduled Requests showing Success status](/exercises/ex1/images/ex1_24_devhub_scheduled_requests.png)
+   <br>![Admin Center → Scheduled Requests showing Success status](/exercises/ex1/images/ex1_17_devhub_scheduled_requests.png)
 
    > **Note:** Once the status shows **Success**, your product appears in the Developer Hub catalog.
 
@@ -221,7 +221,7 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
 
    Choose **Subscribe → Create New Subscription for Agent**. (MCP/AI products are consumed through an **Agent** subscription.)
 
-   <br>![Product detail page with Subscribe action](/exercises/ex1/images/ex1_25_devhub_product_subscribe.png)
+   <br>![Product detail page with Subscribe action](/exercises/ex1/images/ex1_18_devhub_product_subscribe.png)
 
 2. In the **Create New Subscription for Agent** dialog fill in:
 
@@ -234,7 +234,7 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
 
    Choose **Create**.
 
-   <br>![Create New Subscription for Agent dialog](/exercises/ex1/images/ex1_26_devhub_create_subscription.png)
+   <br>![Create New Subscription for Agent dialog](/exercises/ex1/images/ex1_19_devhub_create_subscription.png)
 
 3. The subscription is created and may show "Your subscription is being finalized. Please refresh the page after some time." Wait, then **refresh**. Once finalized, the subscription's **Overview** tab shows a **Credentials** section with three values, each with a reveal (eye) icon and a copy button:
 
@@ -246,7 +246,7 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
 
    Copy all three — you will use them in the next step and in [Exercise 1.4](#exercise-14--inspect-and-consume-the-mcp-servers-with-mcp-inspector).
 
-   <br>![Subscription credentials — Token URL, Key, and Secret](/exercises/ex1/images/ex1_27_devhub_credentials.png)
+   <br>![Subscription credentials — Token URL, Key, and Secret](/exercises/ex1/images/ex1_20_devhub_credentials.png)
 
    > **Important:** Treat the **Key** and **Secret** like a password — do not share or commit them.
 
@@ -271,7 +271,7 @@ The MCP endpoints are protected by OAuth2. You exchange **Key** + **Secret** at 
 
 The response JSON contains an `access_token` field — that value is your bearer token.
 
-<br>![curl command and the JSON response containing access_token](/exercises/ex1/images/ex1_28_token_curl.png)
+<br>![curl command and the JSON response containing access_token](/exercises/ex1/images/ex1_21_token_curl.png)
 
 **Option B — Bruno app:**
 
@@ -283,15 +283,15 @@ The response JSON contains an `access_token` field — that value is your bearer
    | **Client ID** | `<KEY>` |
    | **Client Secret** | `<SECRET>` |
 
-   <br>![Bruno — OAuth 2.0 Client Credentials configuration](/exercises/ex1/images/ex1_29_token_bruno_01.png)
+   <br>![Bruno — OAuth 2.0 Client Credentials configuration](/exercises/ex1/images/ex1_22_token_bruno_01.png)
 
 2. Scroll down and choose **Get Access Token**.
 
-   <br>![Bruno — Get Access Token](/exercises/ex1/images/ex1_29_token_bruno_02.png)
+   <br>![Bruno — Get Access Token](/exercises/ex1/images/ex1_23_token_bruno_02.png)
 
 3. Scroll back up and copy the generated **Access Token** — this is your bearer token.
 
-   <br>![Bruno — copy the generated access token](/exercises/ex1/images/ex1_29_token_bruno_03.png)
+   <br>![Bruno — copy the generated access token](/exercises/ex1/images/ex1_24_token_bruno_03.png)
 
 > **Note:** The token is short-lived. If the MCP Inspector later returns 401, regenerate the token and reconnect.
 
@@ -308,13 +308,17 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
 
 1. Open your deployed MCP server and copy its **endpoint URL** — shown on the MCP server's **Overview** tab as the **MCP URL** (also available in **Monitor → Integrations and APIs → Manage Integration Content → Endpoints**, see [Exercise 1.5](#exercise-15--monitor-the-mcp-servers-usage)).
 
-   <br>![Copy the MCP server endpoint URL](/exercises/ex1/images/ex1_14_mcp_url.png)
+   <br>![Copy the MCP server endpoint URL](/exercises/ex1/images/ex1_25_mcp_url.png)
 
 2. Generate a **bearer token** as described in [Exercise 1.3](#exercise-13--obtain-credentials-via-developer-hub) (the `access_token` from the client-credentials request). You will paste it as an `Authorization: Bearer` header in the Inspector.
 
-### Step 2: Launch MCP Inspector
+### Step 2: Open MCP Inspector
 
-3. Open a terminal and run the Inspector. It starts a small local web app and opens it in your browser.
+3. Open the **MCP Inspector**. You can use the hosted instance (preferred) or run it locally — either way you land on the same Inspector UI, and the remaining steps are identical.
+
+   **Option A — Hosted Inspector (preferred):** Open [https://url.sap/vn4lob](https://url.sap/vn4lob) in your browser and log on with the same workshop user and password you used to access SAP Integration Suite (see [Accessing the system](../../README.md#accessing-the-system)). No local installation is required.
+
+   **Option B — Run it locally:** Requires **Node.js**. Open a terminal and run the Inspector — it starts a small local web app and opens it in your browser.
 
    - **macOS:** open **Terminal** (press `⌘ + Space`, type `Terminal`, press `Enter`).
    - **Windows:** open **Windows Terminal** or **Command Prompt** (press the `Windows` key, type `cmd`, press `Enter`).
@@ -329,11 +333,11 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
 
 4. In the Inspector, choose **Add Servers**.
 
-   <br>![Choose Add Servers](/exercises/ex1/images/ex1_15_inspector_01.png)
+   <br>![Choose Add Servers](/exercises/ex1/images/ex1_26_inspector_01.png)
 
 5. Choose **+ Add manually**.
 
-   <br>![Choose Add manually](/exercises/ex1/images/ex1_15_inspector_02.png)
+   <br>![Choose Add manually](/exercises/ex1/images/ex1_27_inspector_02.png)
 
 6. In the **Add server** dialog, fill in the details and choose **Add**:
 
@@ -343,21 +347,21 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
    | **Transport** | `streamable-http` |
    | **URL** | Your MCP server's endpoint URL (`<MCP_URL>` from Step 1) |
 
-   <br>![Add server — Server ID, Transport, and URL](/exercises/ex1/images/ex1_15_inspector_03.png)
+   <br>![Add server — Server ID, Transport, and URL](/exercises/ex1/images/ex1_28_inspector_03.png)
 
 ### Step 4: Add the bearer token as a custom header
 
 7. On the server card, choose **Settings**.
 
-   <br>![Open the server Settings](/exercises/ex1/images/ex1_15_inspector_04.png)
+   <br>![Open the server Settings](/exercises/ex1/images/ex1_29_inspector_04.png)
 
 8. Collapse the **Options** section.
 
-   <br>![Collapse the Options section](/exercises/ex1/images/ex1_15_inspector_05.png)
+   <br>![Collapse the Options section](/exercises/ex1/images/ex1_30_inspector_05.png)
 
 9. Expand the **Custom Headers** section.
 
-   <br>![Expand the Custom Headers section](/exercises/ex1/images/ex1_15_inspector_06.png)
+   <br>![Expand the Custom Headers section](/exercises/ex1/images/ex1_31_inspector_06.png)
 
 10. Choose **+ Add Header**, add the header below, then close the dialog:
 
@@ -366,25 +370,25 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
     | **Header Name** | `Authorization` |
     | **Value** | `Bearer <access_token>` *(the token from [Exercise 1.3](#exercise-13--obtain-credentials-via-developer-hub))* |
 
-    <br>![Add an Authorization: Bearer custom header](/exercises/ex1/images/ex1_15_inspector_07.png)
+    <br>![Add an Authorization: Bearer custom header](/exercises/ex1/images/ex1_32_inspector_07.png)
 
 ### Step 5: Connect and invoke a tool
 
 11. Toggle the server **Connect** switch. The server shows **Connected** and the protocol handshake appears in the message log.
 
-    <br>![Toggle the Connect switch](/exercises/ex1/images/ex1_15_inspector_08.png)
+    <br>![Toggle the Connect switch](/exercises/ex1/images/ex1_33_inspector_08.png)
 
 12. Choose the **Tools** tab at the top.
 
-    <br>![Open the Tools tab](/exercises/ex1/images/ex1_15_inspector_09.png)
+    <br>![Open the Tools tab](/exercises/ex1/images/ex1_34_inspector_09.png)
 
 13. Select the **Swiss company check by UID** (`company_check`) tool, enter the **uid** `CHE-109.815.753`, and choose **Execute Tool**.
 
-    <br>![Select company_check, enter the UID, and execute](/exercises/ex1/images/ex1_15_inspector_10.png)
+    <br>![Select company_check, enter the UID, and execute](/exercises/ex1/images/ex1_35_inspector_10.png)
 
 14. Review the result returned through the governed Integration Cell endpoint.
 
-    <br>![Tool execution result](/exercises/ex1/images/ex1_15_inspector_11.png)
+    <br>![Tool execution result](/exercises/ex1/images/ex1_36_inspector_11.png)
 
 ---
 
@@ -398,7 +402,7 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 2. In the **Manage Integration Content** area, choose the tile that lists deployed artifacts. Each entry shows its **Name** (with artifact type) and **Status** (see [Runtime Status](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/runtime-status)).
 
-   <br>![Deployed APIs and MCP servers in Manage Integration Content](/exercises/ex1/images/ex1_18_manage_integration_content.png)
+   <br>![Deployed APIs and MCP servers in Manage Integration Content](/exercises/ex1/images/ex1_37_manage_integration_content.png)
 
 3. Search for your MCP server by name or ID, or filter by **Status** / **Type** via **Table Settings**.
 
@@ -414,7 +418,7 @@ In this sub-exercise you will find where to check the deployment status, runtime
 
 6. Choose **Analyze** from the left navigation to open the analytics dashboards. At the top, set **Runtime** to **Integration Cell** and **Artifact Type** to **MCP Server** so the view focuses on your MCP servers.
 
-   <br>![Analyze — Runtime: Integration Cell, Artifact Type: MCP Server](/exercises/ex1/images/ex1_19_analyze.png)
+   <br>![Analyze — Runtime: Integration Cell, Artifact Type: MCP Server](/exercises/ex1/images/ex1_38_analyze.png)
 
 7. Explore the KPI tiles (**Total MCP Calls**, **MCP Response Time**, **Total MCP Errors**) and the **MCP Charts** below them. Use the tabs (**Overview**, **Health**, **Usage**, **Anomalies**, **Predictions**) and the chart filters (**All MCP Servers** or **Select MCP Servers from the list**) to review usage, performance, and traffic for your deployed MCP servers. See [Analyze APIs and MCP Servers](https://help.sap.com/docs/integration-suite/isuite-integrations-and-apis/analyze-apis-and-mcp-servers).
 
