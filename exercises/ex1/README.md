@@ -95,11 +95,11 @@ In this sub-exercise you will create an MCP server that **proxies a remote (thir
 - the **FINMA** register of supervised institutions and the FINMA warnings list,
 - correspondences between the **NOGA / NACE / ISIC** activity classifications.
 
-It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) and requires **no authentication**, which makes it a convenient public remote MCP server to use for this exercise.
+It is free with no key or sign-up (rate-limited to 100 calls per hour per IP) and requires **no authentication**, which makes it a convenient public remote MCP server to use for this exercise. This is provided by a private company which is not linked to any Swiss federal government departments. All rights reserved to them.
 </details>
 
 > [!NOTE]
-> The destination this sub-exercise needs — **`openswissdata`** (HTTP, Proxy Type `Internet`, `NoAuthentication`, URL `https://mcp.openswissdata.com/jsonrpc`, labels `IntegrationCell.Include = true` and `IntegrationCell.Provides = mcp`) — is **already set up for you**. See [Getting Started → The OpenSwissData destination](../ex0/README.md#the-openswissdata-destination-for-exercise-12). The remote server must support the **Streamable HTTP** transport (OpenSwissData does); only destinations with **Proxy Type** `Internet` can be used as a remote MCP source.
+> The destination this sub-exercise needs — **`openswissdata`** is **already set up for you**. See [Getting Started → The OpenSwissData destination](../ex0/README.md#the-openswissdata-destination-for-exercise-12). The remote server must support the **Streamable HTTP** transport (OpenSwissData does); only destinations with **Proxy Type** `Internet` can be used as a remote MCP source.
 
 1. Log on to SAP Integration Suite and choose **Design → Integrations and APIs**.
 
@@ -324,8 +324,6 @@ In this optional sub-exercise you will connect the **MCP Inspector** — the off
    ```bash
    npx @modelcontextprotocol/inspector
    ```
-
-   <br>![MCP Inspector running in the browser](/exercises/ex1/images/ex1_15_inspector_launch.png)
 
 ### Step 3: Add the MCP server
 
