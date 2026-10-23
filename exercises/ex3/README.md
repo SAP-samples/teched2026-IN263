@@ -14,6 +14,11 @@ Groovy scripts are where integration flows most often leak memory or burn CPU �
 > - **Do not** expose sensitive information in scripts you submit to **Optimize** (SAP Note [3542713](https://me.sap.com/notes/3542713)).
 > - **Optimize** can be used repeatedly, but there is a per-minute rate limit and a monthly fair-usage token quota.
 
+## Exercises
+
+- [Exercise 3.1 — Run the AI Review on a Groovy Script](#exercise-31--run-the-ai-review-on-a-groovy-script)
+- [Exercise 3.2 — Apply the Recommendations](#exercise-32--apply-the-recommendations)
+
 ## Exercise 3.1 — Run the AI Review on a Groovy Script
 
 In this sub-exercise you will generate an AI Review Report for your Groovy script.

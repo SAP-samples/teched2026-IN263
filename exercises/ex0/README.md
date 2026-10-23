@@ -26,10 +26,13 @@ Your workshop user has already been given the role collections below (assigned i
 | --- | --- |
 | `PI_Administrator` | Activating AI features; administering Cloud Integration |
 | `PI_Integration_Developer` | Designing integration flows and MCP server artifacts |
-| `AuthGroup.API.ApplicationDeveloper` | Subscribing to products and obtaining credentials in Developer Hub |
+| `AuthGroup.Content.Admin` | Creating and publishing a **Product** (and adding MCP servers to it) in the Developer Hub **Admin Center → Content** (Exercise 1.3) |
+| `AuthGroup.API.ApplicationDeveloper` | Registering in the Developer Hub, subscribing to a product, and obtaining the application/subscription **credentials** (Token URL / Key / Secret) (Exercise 1.3) |
 | `WebToolingWorkspace.Write` | Using **Optimize** in the Groovy script editor |
 
-> You can confirm the active capabilities any time in the SAP Integration Suite launchpad under **Settings** — **Cloud Integration** and **API Management** are activated and the **Integration Cell** runtime is available. (Newly assigned roles only take effect after logging off and on again.)
+> The `AuthGroup.API.ApplicationDeveloper` role is granted through Developer Hub registration (self-registration / Add User) or IdP role-collection mapping rather than assigned manually in the BTP Cockpit. Newly assigned roles only take effect after logging off and on again.
+
+> You can confirm the active capabilities any time in the SAP Integration Suite launchpad under **Settings** — **Cloud Integration** and **API Management** are activated and the **Integration Cell** runtime is available.
 
 ## Artificial Intelligence features (already activated)
 

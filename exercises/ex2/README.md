@@ -12,6 +12,12 @@ Memory problems in an integration flow usually surface only at runtime, under lo
 > [!IMPORTANT]
 > If your tenant is on the Cloud Foundry environment, the simulation **input payload must be < 100 KB** and the **overall output payload < 1 MB**.
 
+## Exercises
+
+- [Exercise 2.1 — Build the Integration Flow](#exercise-21--build-the-integration-flow)
+- [Exercise 2.2 — Configure and Run a Simulation with Memory Profiling](#exercise-22--configure-and-run-a-simulation-with-memory-profiling)
+- [Exercise 2.3 — Review the Memory Profiling Insights and Apply Fixes](#exercise-23--review-the-memory-profiling-insights-and-apply-fixes)
+
 ## Exercise 2.1 — Build the Integration Flow
 
 In this sub-exercise you will create the integration flow you will profile: **Start → Content Modifier → Groovy Script → End**.
