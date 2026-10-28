@@ -17,6 +17,10 @@ import org.w3c.dom.NodeList
  *     which reallocates the entire String on every line (quadratic memory churn / GC pressure)
  *   - a parallel List keeps a second full copy of every row
  *   - a per-item Map is allocated for every line and retained in a List
+ *   - a full copy of the growing report is snapshotted and retained on every line,
+ *     so retained heap grows quadratically with the number of items
+ *   - the grand total tax is recomputed by re-scanning the entire item list once per
+ *     item (O(n^2) inefficient loop) instead of being summed in a single pass
  *
  * It uses only classes available on the Integration Cell Groovy runtime: the SAP Message
  * API and the standard Java DOM parser (javax.xml.parsers). It does NOT use XmlSlurper,
@@ -38,6 +42,10 @@ def Message processData(Message message) {
     // Anti-pattern 2: also keep a second full copy of every row, plus a Map per item.
     List<String> allRows = new ArrayList<String>()
     List<Map> allItems = new ArrayList<Map>()
+
+    // Anti-pattern 3: retain a bulky snapshot of the whole report-so-far on every line,
+    // so the heap keeps a growing chain of ever-larger String copies that are never released.
+    List<String> reportSnapshots = new ArrayList<String>()
 
     NodeList orders = doc.getElementsByTagName("Order")
     for (int o = 0; o < orders.getLength(); o++) {
@@ -65,12 +73,35 @@ def Message processData(Message message) {
                           row.unitPrice + "," + row.currency + "," + row.taxAmount
             report = report + line + "\n"   // reallocates the whole String every iteration
             allRows.add(line)
+
+            // Anti-pattern 3 (cont.): keep a full copy of the report as it grows, line by line.
+            // Each retained snapshot is bigger than the last, so overall retained memory grows
+            // quadratically with the number of items.
+            reportSnapshots.add(new String(report))
         }
+    }
+
+    // Inefficient loop: recompute the grand total of every tax amount by re-scanning the
+    // entire item list once per item (O(n^2)) instead of summing once in the loop above.
+    double grandTotalTax = 0.0d
+    for (int a = 0; a < allItems.size(); a++) {
+        double runningForA = 0.0d
+        for (int b = 0; b < allItems.size(); b++) {
+            Map other = allItems.get(b)
+            String tax = String.valueOf(other.taxAmount)
+            if (tax != null && tax.length() > 0) {
+                runningForA = runningForA + Double.parseDouble(tax)
+            }
+        }
+        // only the last pass actually matters, but we redo the full scan every iteration
+        grandTotalTax = runningForA
     }
 
     message.setBody(report)
     message.setHeader("X-Order-Count", String.valueOf(orders.getLength()))
     message.setHeader("X-Item-Count",  String.valueOf(allItems.size()))
+    message.setHeader("X-Grand-Total-Tax", String.valueOf(grandTotalTax))
+    message.setHeader("X-Report-Snapshots", String.valueOf(reportSnapshots.size()))
     return message
 }
 
