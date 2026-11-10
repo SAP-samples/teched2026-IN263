@@ -255,7 +255,8 @@ In this sub-exercise you will publish your two deployed MCP servers as a **Produ
 The MCP endpoints are protected by OAuth2. You exchange **Key** + **Secret** at the **Token URL** for a short-lived **bearer token** (`access_token`) using the **client-credentials** grant.
 
 **Option A — command line:**
-
+   > [!NOTE]
+   > You can use any text editor to change the values of \<TOKEN_URL\>, \<KEY\> and \<SECRET\> before pasting the command line in the terminal. 
 - **macOS / Linux:**
   ```bash
   curl -s -X POST '<TOKEN_URL>' \
