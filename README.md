@@ -45,7 +45,7 @@ This list is what you would need to reproduce the exercises in your own environm
 
 To complete the exercises you need access to the pre-configured SAP Integration Suite tenant. **If you cannot access the system, please contact the workshop instructors.**
 
-1. Open [https://url.sap/vutrsb](https://url.sap/vutrsb) in your browser.
+1. Open [https://url.sap/17o8td](https://url.sap/17o8td ) in your browser.
 
 2. Log on with the workshop user assigned to you:
 
